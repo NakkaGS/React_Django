@@ -1,30 +1,36 @@
+//index.html->index.js->App.js->HomeScreen.js
+
 //This is the main body
 
-import { Container } from 'react-bootstrap' //installed using the console
+import React from "react";
 
-import Header from './components/Header' //using <Header /> it will add the content from the component
-import Footer from './components/Footer' //using <Footer /> it will add the content from the component
+import { Container } from "react-bootstrap"; //installed using the console
+import { BrowserRouter as Router,Routes, Route } from 'react-router-dom'
 
-import HomeScreen from './screens/HomeScreen' //using <HomeScree /> it will add the content from the component
+import Header from "./components/Header"; //using <Header /> it will add the content from the component
+import Footer from "./components/Footer"; //using <Footer /> it will add the content from the component
+
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
 
 //it is equal to <body>
 function App() {
   return (
-    <div>
-      <Header /> 
+      <Router>
+        <Header />
+        
+        <main className="py-3">
+          <Container>
+            <Routes> {/* the Route needs to be involver with Routes and Router*/}
+              <Route path='/' element={<HomeScreen/>} exact /> {/* In the new version, it is element and not component */}
+              <Route path='/product/:id' element={<ProductScreen/>} />
+            </Routes>
+          </Container>
+        </main>
 
-      <main className='py-3'>
-        <Container>
-
-            <HomeScreen />
-            
-        </Container> 
-      </main>
-
-      <Footer />
-    </div>
-  ) 
+        <Footer />
+      </Router>
+  );
 }
 
 export default App;
-
