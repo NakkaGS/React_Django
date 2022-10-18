@@ -1,13 +1,28 @@
 //App.js->HomeScreen.js
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Row, Col } from "react-bootstrap"; //installed using the console
 
-import products from "../products"; //reads the file products.js
+//import products from "../products"; //reads the file products.js
 import Product from "../components/Product"; //import the component Product
 
+import axios from 'axios'
+
 function HomeScreen() {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+
+    async function fetchProducts() {
+      const { data } = await axios.get('/api/products/')
+      setProducts(data)
+    }
+
+    fetchProducts()
+
+  }, [])
+  
   return (
     <div>
       <h1>Latest Products</h1>

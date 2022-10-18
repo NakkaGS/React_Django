@@ -3,7 +3,7 @@
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 
-import { Navbar, Nav, Container, Row } from "react-bootstrap"; //installed using the console
+import { Navbar, Nav, Container } from "react-bootstrap"; //installed using the console
 
 function Header() {
   return (
