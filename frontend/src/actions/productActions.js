@@ -50,4 +50,4 @@ export const listProductDetails = (id) => async (dispatch) => { //it is a action
                 : error.message,
         })
     }
-}
+} 
