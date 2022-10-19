@@ -29,6 +29,9 @@ pip install django-cors-headers
 ## Django (http://127.0.0.1:8000/admin)
 
 Go to the Virtual Enviroment
+```
+myenv\Scripts\activate
+```
 
 Go to the backend Folder
 
