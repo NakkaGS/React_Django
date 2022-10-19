@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 #urls.py(Backend)->urls.py(Base)
+#it needs to call the urls from the application (base)
 
 from django.contrib import admin
 from django.urls import path, include #include add a file from a app
@@ -24,7 +25,7 @@ from django.conf.urls.static import static #allows us to connect out urls
 
 urlpatterns = [
 
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), #Open the admin website
     path('api/', include('base.urls')), #call the urls from the other app
 ]
 

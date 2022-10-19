@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework', #Django Rest Framework
-    'corsheaders', #
+    'corsheaders', #django cors headers
 
     'base.apps.BaseConfig',
 
