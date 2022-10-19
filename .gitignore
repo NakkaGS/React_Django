@@ -6,6 +6,10 @@
 /.pnp
 .pnp.js
 
+# Django Key
+/backend/backend/settings.py
+
+
 # testing
 /coverage
 
