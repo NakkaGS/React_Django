@@ -9,6 +9,7 @@
 # Django Key
 
 backend/backend/settings.py
+backend/.env
 
 
 # testing
