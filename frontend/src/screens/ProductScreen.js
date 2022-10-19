@@ -7,16 +7,15 @@ import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap"; //Li
 
 import Rating from "../components/Rating";
 
-import Loader from '../components/Loader' //to have the Spinner in the page
-import Message from '../components/Message' //to have the Error in the page
-
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 //import products from "../products"; //used to read the products.js
 
 import { listProductDetails } from '../actions/productActions'
 
-
 //import axios from 'axios' //not been used after the Redux application
 
+//it was necessary to add '?' every time that we want to get a attribute from the product
 
 function ProductScreen() {
   const dispatch = useDispatch()
@@ -39,7 +38,7 @@ function ProductScreen() {
 
     fetchProduct() */
 
-  }, [dispatch, id])
+  }, [id])
 
   return(
     <div>
@@ -52,25 +51,26 @@ function ProductScreen() {
           :(
             <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={product?.image} alt={product?.name} fluid />
+              {/* //it was necessary to add '?' every time that we want to get a attribute from the product */}
             </Col>
     
             <Col md={3}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  <h3>{product?.name}</h3>
                 </ListGroup.Item>
     
                 <ListGroup.Item>
-                  <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
+                  <Rating value={product?.rating} text={`${product?.numReviews} reviews`} color={'#f8e825'} />
                 </ListGroup.Item>
     
                 <ListGroup.Item>
-                  Price: ${product.price}
+                  Price: ${product?.price}
                 </ListGroup.Item>
     
                 <ListGroup.Item>
-                  Description: {product.description}
+                  Description: {product?.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -85,7 +85,7 @@ function ProductScreen() {
                       </Col>
     
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>${product?.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -97,13 +97,13 @@ function ProductScreen() {
                       </Col>
                       
                       <Col>
-                        {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                        {product?.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                       </Col>
                     </Row>
                   </ListGroup.Item>
     
                   <ListGroup.Item>
-                    <Button className='btn-block' disabled={product.countInStock === 0} type='button'>Add to Cart</Button>
+                    <Button className='btn-block' disabled={product?.countInStock === 0} type='button'>Add to Cart</Button>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
