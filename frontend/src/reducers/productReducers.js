@@ -9,7 +9,7 @@ import {
 
 } from '../constants/productConstants' //it is like enum in C
 
-export const productListReducers = (state = {products:[]}, action) => {
+export const productListReducer = (state = {products:[]}, action) => {
     switch(action.type){
         case PRODUCT_LIST_REQUEST:
             return {loading:true, product: []}
@@ -21,15 +21,15 @@ export const productListReducers = (state = {products:[]}, action) => {
             return {loading: false, error: action.payload}
         
         default:
-            return state
+            return state;
     }
 }
 
 //
-export const productDetailsReducers = (state = {products: {reviews:[]}}, action) => {
+export const productDetailsReducer = (state = {products: {reviews:[]}}, action) => {
     switch(action.type){
         case PRODUCT_DETAILS_REQUEST:
-            return {loading:true, ...state}
+            return {loading: true, ...state, product: []}
         
         case PRODUCT_DETAILS_SUCCESS:
             return {loading: false, product: action.payload}
@@ -38,6 +38,6 @@ export const productDetailsReducers = (state = {products: {reviews:[]}}, action)
             return {loading: false, error: action.payload}
         
         default:
-            return state
+            return state;
     }
 }
