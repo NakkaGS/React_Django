@@ -6,8 +6,7 @@
 /.pnp
 .pnp.js
 
-# Django Key
-
+# Django Key - used in python-decouple
 backend/backend/settings.py
 backend/.env
 
