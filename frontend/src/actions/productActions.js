@@ -10,11 +10,11 @@ import {
     PRODUCT_DETAILS_FAIL,
 } from '../constants/productConstants' //it is like enum in C
 
+//it works like a state machine
 export const listProducts = (keyword = '') => async (dispatch) => { //it is a action
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
-
-        const { data } = await axios.get(`/api/products${keyword}`)
+            const { data } = await axios.get(`/api/products${keyword}`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -24,8 +24,8 @@ export const listProducts = (keyword = '') => async (dispatch) => { //it is a ac
     } catch (error) {
         dispatch({
             type: PRODUCT_LIST_FAIL,
-            payload: error.response && error.response.data.detail
-                ? error.response.data.detail
+            payload: error.response && error.response.data.detail //if there a detail it show the detail, otherwise it shows the message set in 
+                ? error.response.data.detail 
                 : error.message,
         })
     }
@@ -34,8 +34,7 @@ export const listProducts = (keyword = '') => async (dispatch) => { //it is a ac
 export const listProductDetails = (id) => async (dispatch) => { //it is a action
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
-
-        const { data } = await axios.get(`/api/products/${id}`)
+            const { data } = await axios.get(`/api/products/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

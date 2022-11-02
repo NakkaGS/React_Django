@@ -5,6 +5,7 @@ import {
     CART_REMOVE_ITEM
 } from '../constants/cartConstants'
 
+//It works like a State Machine
 //getState - lets get any part of the state (can get a single item)
 export const addToCart = (id, qty) => async (dispatch, getState) => { //it is a action
      
@@ -25,7 +26,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => { //it is a 
         })
     
     //it will save the data into the local pc
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) //it needs to be a string
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) //it needs to be a string (stringify)
 }
 
 export const removeFromCart = (id) => (dispatch, getState) => {
@@ -34,5 +35,5 @@ export const removeFromCart = (id) => (dispatch, getState) => {
         payload: id,
     })
 
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) //it needs to be a string (stringify)
 }
