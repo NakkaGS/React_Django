@@ -9,7 +9,8 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 function CartScreen({match}) { //match is used in useParams and history is useNavigate
   let product = useParams(match)
   let productId = product.id
-
+  
+  //Local Storage
   const location = useLocation()//this functions is equal to location.seach
   const qty = location.search ? Number(location.search.split('=')[1] ): 1 //it get the route $qty=1, separate $qty and 1, after get the second array 
   //console.log('qty: ', qty)
@@ -25,8 +26,6 @@ function CartScreen({match}) { //match is used in useParams and history is useNa
   useEffect(() => {
     if (productId) {
         dispatch(addToCart(productId, qty))
-        
-        
     }
   }, [dispatch, productId, qty])
 
@@ -101,11 +100,12 @@ function CartScreen({match}) { //match is used in useParams and history is useNa
           </ListGroup>
         )}
       </Col>
+      {/* ////////////////////// */}
       <Col md={4}>
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)} items</h2>
+              <h2>Subtotal {cartItems.reduce((acc, item) => acc + item.qty, 0)} items</h2>
               ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
             </ListGroup.Item>
           </ListGroup>

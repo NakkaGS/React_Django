@@ -1,5 +1,5 @@
 # React_Django
-ECommerce in React+Redux+Django
+ECommerce in React+Redux+Django+Rest_framework_simplejwt
 
 ##### Project from Dennis Ivy - [Udemy Page](https://www.udemy.com/share/1043DY3@HuOSyjyc8t5xqKHk8rT3XofQkpo4O07LUh9oha4FwSuwlW7rwRoxT4P5FVHbocNf/)
 
