@@ -1,6 +1,8 @@
-#urls.py(Backend)->urls.py(Base)
+#urls.py(Backend)->order_urls.py(Base)
 from django.urls import path
-from base.views import order_views as views #import all the function defined in the base/views.py
+
+#import all the function defined in the base/views/order_views.py
+from base.views import order_views as views 
 
 #from  rest_framework_simplejwt import (TokenObtainPairView)
 

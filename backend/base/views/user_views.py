@@ -1,8 +1,10 @@
+#urls.py->product_urls.py->product_views.py
+
 from imp import is_builtin
 from django.shortcuts import render
 
-from django.contrib.auth.models import User #takes the User accounts data, used also for permisition
-
+#takes the User accounts data, used also for permisition
+from django.contrib.auth.models import User 
 
 #Django Rest Framework - Representational state transfer (REST) 
 #In general, RESTful web APIs are loosely based on HTTP methods such as GET, POST, PUT, PATCH, DELETE, OPTIONS. 
@@ -11,17 +13,16 @@ from django.contrib.auth.models import User #takes the User accounts data, used 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response 
+from rest_framework import status
 
 #from .products import products #--imports the data from product.py
 from base.serializers import UserSerializerWithToken #this creates a javascript file to be use as data
 from base.serializers import UserSerializer, UserSerializerWithToken
 
-
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from rest_framework import status
 from django.contrib.auth.hashers import make_password
 
 @api_view(['GET'])
@@ -40,7 +41,6 @@ def getUsers(request):
     users = User.objects.all() #show all the products
     serializer = UserSerializer(users, many=True) #show many 'products'
     return Response(serializer.data)
-
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

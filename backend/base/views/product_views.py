@@ -1,3 +1,5 @@
+#urls.py->product_urls.py->product_views.py
+
 from imp import is_builtin
 from django.shortcuts import render
 
@@ -26,8 +28,6 @@ def getProducts(request):
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk) #show the product with the <id> == pk (primary key)
     serializer = ProductSerializer(product, many=False) #show just one Item
-
-
 
     #it is used for read the products.js
     # product = None
