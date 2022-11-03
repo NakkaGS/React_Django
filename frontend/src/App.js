@@ -5,7 +5,7 @@
 import React from "react";
 
 import { Container } from "react-bootstrap"; //installed using the console
-import { BrowserRouter as Router,Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Header from "./components/Header"; //using <Header /> it will add the content from the component
 import Footer from "./components/Footer"; //using <Footer /> it will add the content from the component
