@@ -19,38 +19,75 @@ from rest_framework import status
 from base.serializers import UserSerializerWithToken #this creates a javascript file to be use as data
 from base.serializers import UserSerializer, UserSerializerWithToken
 
-# Create your views here.
+##############################
+#It is used for authentication
+#Simple JWT provides a JSON Web Token authentication backend for the Django REST Framework. 
+#It aims to cover the most common use cases of JWTs by offering a conservative set of default features. 
+#It also aims to be easily extensible in case a desired feature is not present.
+##############################
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from django.contrib.auth.hashers import make_password
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated]) #It blocks the request to get data for just those who is authenticated
-def getUserProfile(request):
-    user = request.user
-    
-    serializer = UserSerializer(user, many=False) #show just one Item
-
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-@permission_classes([IsAdminUser]) #It blocks the request to get data for just those who is Admin
-def getUsers(request):
-    users = User.objects.all() #show all the products
-    serializer = UserSerializer(users, many=True) #show many 'products'
-    return Response(serializer.data)
-
+#################
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
         serializer = UserSerializerWithToken(self.user).data
-
         for k, v in serializer.items():
             data[k] = v
 
         return data
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+#################
+
+@api_view(['POST'])
+def registerUser(request):
+    data = request.data
+    try:
+        user = User.objects.create(
+            first_name=data['name'],
+            username=data['email'],
+            email=data['email'],
+            password=make_password(data['password'])
+        )
+
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+        
+    except:
+        message = {'detail': 'User with this email already exists'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated]) #It blocks the request to get data for just those who is authenticated
+def getUserProfile(request):
+    user = request.user
+    serializer = UserSerializer(user, many=False) #show just one Item
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUsers(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+
+
         

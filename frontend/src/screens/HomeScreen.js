@@ -1,25 +1,22 @@
 //App.js->HomeScreen.js
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 //Redux
-
-import { useDispatch, useSelector } from 'react-redux' //Redux
+import { useDispatch, useSelector } from 'react-redux' 
 //useSelector - allows us to used certain parts of the state/reducer
-
 import { listProducts } from '../actions/productActions'
 
-//Redux End
-
+//Boostrap Components
 import { Row, Col } from "react-bootstrap"; //installed using the console
 
-//import products from "../products"; //reads the file products.js
-import Product from "../components/Product"; //import the component Product
-
-
+//Components
+import Product from '../components/Product'; //import the component Product
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
+
 //import axios from 'axios' //not been used after the Redux application
+//import products from "../products"; //reads the file products.js
 
 function HomeScreen() {
   //const [products, setProducts] = useState([]) //not been used after the Redux application
@@ -33,7 +30,6 @@ function HomeScreen() {
 
     dispatch(listProducts())
 
-
     //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
   /*     async function fetchProducts() {
       const { data } = await axios.get('/api/products/')
@@ -44,9 +40,7 @@ function HomeScreen() {
     */
 
   }, [dispatch]) //it is to create a loading/ error view
-
-
-  
+ 
   return (
     <div>
       <h1>Latest Products</h1>

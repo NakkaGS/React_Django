@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-
-import { Link, useParams, useNavigate  } from "react-router-dom"; //Library React Router Dom
-
-import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"; //Library React Bootstrap
-
-import Rating from "../components/Rating";
-
-import Loader from '../components/Loader'
-import Message from '../components/Message'
-//import products from "../products"; //used to read the products.js
-
-import { listProductDetails } from '../actions/productActions' //this is the reducer
+//App.js->Route->ProductScreen.js
 
 //import axios from 'axios' //not been used after the Redux application
+//import products from "../products"; //used to read the products.js
+
+import React, { useState, useEffect } from "react";
+
+import { Link, useParams, useNavigate } from "react-router-dom"; //Library React Router Dom
+
+//Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { listProductDetails } from '../actions/productActions' //this is the reducer
+
+//Bootstrap Components
+import { Row, Col, Image, ListGroup, Button, Card, Form } from "react-bootstrap"; //Library React Bootstrap
+
+//Components
+import Rating from "../components/Rating";
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 //it was necessary to add '?' every time that we want to get a attribute from the product
 

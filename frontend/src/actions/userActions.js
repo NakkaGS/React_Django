@@ -3,6 +3,9 @@
 //write on the store, 
 //check if worked using the brower (Redux)
 //write the action
+
+import axios from 'axios'
+
 import {    
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -10,24 +13,25 @@ import {
     USER_LOGOUT,
 } from '../constants/userConstants'
 
-import { axios } from 'axios'
-
 //It works like a State Machine
-export const login = (email, password) => async(dispatch) => {
-    try{
+export const login = (email, password) => async (dispatch) => {
+    try {
         dispatch({
             type: USER_LOGIN_REQUEST
         })
 
-        const config ={
+
+        //it was necessary to accept the application/json, it was not allowing to login
+        const config = {
             headers: {
-                'Content-type':'application/json'
+                'Content-Type': 'application/json',
+                accept:'application/json'
             }
         }
 
-        const {data} = await axios.post(
-            '/api/users/login/'
-            {'username': email, 'password': password},
+        const { data } = await axios.post(
+            '/api/users/login/',
+            { 'username': email, 'password': password },
             config
         )
 
@@ -38,8 +42,7 @@ export const login = (email, password) => async(dispatch) => {
 
         localStorage.setItem('userInfo', JSON.stringify(data))
 
-
-    }catch (error) {
+    } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
             payload: error.response && error.response.data.detail
@@ -47,4 +50,9 @@ export const login = (email, password) => async(dispatch) => {
                 : error.message,
         })
     }
-} 
+}
+
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userInfo')
+    dispatch({type:USER_LOGOUT})
+}

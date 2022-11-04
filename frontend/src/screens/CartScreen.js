@@ -1,17 +1,25 @@
+//App.js->Route->CartScreen.js
+
 import React, { useEffect } from 'react'
+
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+
+//Boostrap Components
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
+
+//Components
 import Message from '../components/Message'
 
+//Redux
 import { addToCart, removeFromCart } from '../actions/cartActions'
+import { useDispatch, useSelector } from 'react-redux'
 
 function CartScreen({match}) { //match is used in useParams and history is useNavigate
   let product = useParams(match)
   let productId = product.id
   
   //Local Storage
-  const location = useLocation()//this functions is equal to location.seach
+  const location = useLocation()//this functions is equal to location.search
   const qty = location.search ? Number(location.search.split('=')[1] ): 1 //it get the route $qty=1, separate $qty and 1, after get the second array 
   //console.log('qty: ', qty)
   //console.log('ID: ', productId.id)
