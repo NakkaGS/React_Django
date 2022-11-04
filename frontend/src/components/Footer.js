@@ -1,6 +1,8 @@
 //index.html->index.js->App.js->Footer.js
 
 import React from "react";
+
+//Bootstrap Components
 import { Container, Row, Col } from "react-bootstrap";
 
 function Footer() {

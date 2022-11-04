@@ -18,8 +18,8 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 
 function LoginScreen() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('') //it start the variable with what it written inside useState
+    const [password, setPassword] = useState('') 
 
     let history = useNavigate() //for V6 it is useNavigate, NOT useHistory
 
@@ -41,7 +41,7 @@ function LoginScreen() {
     const submitHandler = (e) => {
         e.preventDefault()
         console.log('Submitted')
-        dispatch(login(email, password))
+        dispatch(login(email, password)) //it activate the function login
     }
 
     return(

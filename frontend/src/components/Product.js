@@ -1,7 +1,11 @@
 //App.js->HomeScreen.js->Product.js
 
 import React from 'react'
-import { Card } from 'react-bootstrap'
+
+//Boostrap Components
+import { Card, Row, Col, Badge } from 'react-bootstrap'
+
+//Components
 import Rating from './Rating'
 
 import { Link } from 'react-router-dom'
@@ -29,9 +33,18 @@ function Product({ product }) { //take the product in HomeScreen
           </div>
         </Card.Text>
 
-        <Card.Text as='h3'>
-          ${product.price}
+        <Card.Text as='div'>
+          <Row>
+            <Col>
+              <h3>${product.price}</h3>
+            </Col>
+
+            <Col className="my-3">
+              {product?.countInStock > 0 ? (<Badge bg="success">'In Stock'</Badge>) : (<Badge bg="danger">'Out of Stock'</Badge>)}
+            </Col>
+          </Row>       
         </Card.Text>
+
     </Card>
   )
 }

@@ -9,9 +9,10 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 
 //Components
 import Message from '../components/Message'
+import InfoModal from '../components/InfoModal'
 
 //Redux
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { addToCart } from '../actions/cartActions'
 import { useDispatch, useSelector } from 'react-redux'
 
 function CartScreen({match}) { //match is used in useParams and history is useNavigate
@@ -36,12 +37,6 @@ function CartScreen({match}) { //match is used in useParams and history is useNa
         dispatch(addToCart(productId, qty))
     }
   }, [dispatch, productId, qty])
-
-  //just to test the function
-  const removefromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
-    //console.log('remove: ', productId)
-  }
 
   //just to test the function
   const checkoutHandler = () => {
@@ -91,15 +86,11 @@ function CartScreen({match}) { //match is used in useParams and history is useNa
 
                   </Form.Control>
                   </Col>
+                  
+
 
                   <Col md={1}>
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={()=> removefromCartHandler(item.product)}
-                    >
-                      <i className='fas fa-trash'></i>
-                    </Button>
+                    <InfoModal item={item} />    
                   </Col>
 
                 </Row>
