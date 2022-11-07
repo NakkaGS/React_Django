@@ -6,12 +6,15 @@ import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 
 //Boostrap Components
-import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap"; //installed using the console
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"; //installed using the console
 //import { Link } from "react-router-dom";
 
 //Redux
 import { logout } from '../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
+
+//Components
+import ItemsInCart from '../components/ItemsInCart'
 
 function Header() {
 
@@ -37,7 +40,7 @@ function Header() {
 
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart <Badge pill bg="light" text="dark">9</Badge>
+                  <i className="fas fa-shopping-cart"></i> Cart <ItemsInCart />
                 </Nav.Link>
               </LinkContainer>
 

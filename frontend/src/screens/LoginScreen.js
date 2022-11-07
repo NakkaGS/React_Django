@@ -40,7 +40,6 @@ function LoginScreen() {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('Submitted')
         dispatch(login(email, password)) //it activate the function login
     }
 
