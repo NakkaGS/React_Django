@@ -2,7 +2,8 @@ import axios from 'axios'
 
 import { 
     CART_ADD_ITEM,
-    CART_REMOVE_ITEM
+    CART_REMOVE_ITEM,
+    CART_SAVE_SHIPPING_ADDRESS,
 } from '../constants/cartConstants'
 
 //It works like a State Machine
@@ -36,4 +37,13 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     })
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) //it needs to be a string (stringify)
+}
+
+export const saveShippingAddress = (data) => (dispatch) => {
+    dispatch({
+        type: CART_SAVE_SHIPPING_ADDRESS,
+        payload: data,
+    })
+
+    localStorage.setItem('shippingAddress', JSON.stringify(data)) //it needs to be a string (stringify)
 }

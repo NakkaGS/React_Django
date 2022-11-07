@@ -41,7 +41,7 @@ function CartScreen({match}) { //match is used in useParams and history is useNa
   //just to test the function
   const checkoutHandler = () => {
     //console.log('history: ', history)
-    history('/login?redirect=shipping')//it is using useNavigate, it doesn't need push
+    history('/shipping')//it is using useNavigate, it doesn't need push
   }
 
   return (

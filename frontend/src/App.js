@@ -16,6 +16,7 @@ import CartScreen from "./screens/CartScreen";
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ShippingScreen from './screens/ShippingScreen'
 
 //it is equal to <body>
 function App() {
@@ -39,6 +40,8 @@ function App() {
               <Route path='register' element={<RegisterScreen/>} />
 
               <Route path='profile' element={<ProfileScreen/>} />
+
+              <Route path='shipping' element={<ShippingScreen/>} />
             </Routes>
           </Container>
         </main>

@@ -5,7 +5,10 @@ import {  useNavigate } from "react-router-dom";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
-import { getUserDetails, register } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
+
+//Constants
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 //Bootstrap Components
 import { Form, Button, Row, Col } from "react-bootstrap";
@@ -31,13 +34,17 @@ function ProfileScreen() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const { success } = userUpdateProfile
+
   useEffect(() => {
     if (!userInfo) {
         history('/login');
     } else {
-        if(!user || !user.name || userInfo._id !== user._id){ //that to get the data
+        if(!user || !user.name || userInfo._id !== user._id || success){ //that to get the data
           //console.log(`Before : ${userInfo?.email} and ${userInfo?.name}`)
-            dispatch(getUserDetails('profile'))
+          dispatch({ type: USER_UPDATE_PROFILE_RESET })  
+          dispatch(getUserDetails('profile'))
             //console.log(`Getting data (user name): ${user?.email} and ${user?.name}`)
         }else{ //after get the data it full fill the data with setName and setEmail
             //console.log(`Trying to Fullfill field, ${user?.name} and ${user?.email}`)
@@ -45,14 +52,21 @@ function ProfileScreen() {
             setEmail(user.email)
         }
     }
-  }, [history, dispatch, user, userInfo]);
+  }, [history, dispatch, user, userInfo, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Password do not match");
     } else {
-      dispatch(register(name, email, password)); //it activate the function login
+      //console.log('Updating')
+      dispatch(updateUserProfile({
+        'id': user._id,
+        'name': name,
+        'email': email,
+        'password': password
+    })) 
+      setMessage("");
     }
   };
   return (
