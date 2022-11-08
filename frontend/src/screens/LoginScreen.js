@@ -18,8 +18,8 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 
 function LoginScreen() {
-    const [email, setEmail] = useState('') //it start the variable with what it written inside useState
-    const [password, setPassword] = useState('') 
+    const [email, setEmail] = useState(""); //it start the variable with what it written inside useState
+    const [password, setPassword] = useState(""); 
 
     let history = useNavigate() //for V6 it is useNavigate, NOT useHistory
 
@@ -53,6 +53,7 @@ function LoginScreen() {
                 <Form.Group className="mb-3" controlId='email'>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
+                        autoComplete="username"
                         type='email'
                         placeholder='Enter Email'
                         value={email}
@@ -64,6 +65,7 @@ function LoginScreen() {
                 <Form.Group className="mb-3" controlId='password'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                        autoComplete="current-password"
                         type='password'
                         placeholder='Enter Password'
                         value={password}

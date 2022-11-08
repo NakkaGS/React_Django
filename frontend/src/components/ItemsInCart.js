@@ -33,10 +33,13 @@ function ItemsInCart() {
     init();
   }, []);
 
-  cartItemsFromStorage.forEach(function (e) {
-    totalItems += e.qty;
-  });
-  
+  if (localStorage.getItem('cartItems') ) {
+    cartItemsFromStorage.forEach(function (e) {
+      totalItems += e.qty;
+    })
+  }else{
+    totalItems = 0
+  }
 
   return (
     <Badge pill bg="light" text="dark">

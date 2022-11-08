@@ -15,6 +15,8 @@ import Product from '../components/Product'; //import the component Product
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
 
+import MainBody from '../components/MainBody'
+
 //import axios from 'axios' //not been used after the Redux application
 //import products from "../products"; //reads the file products.js
 
@@ -43,6 +45,7 @@ function HomeScreen() {
  
   return (
     <div>
+      <MainBody />
       <h1>Latest Products</h1>
 
       {loading ? <Loader /> //it is to create the loadin and error view 

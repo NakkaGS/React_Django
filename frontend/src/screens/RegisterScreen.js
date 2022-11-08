@@ -86,6 +86,7 @@ function RegisterScreen() {
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
+            autoComplete="current-password"
             type="password"
             placeholder="Enter Password"
             value={password}
@@ -97,6 +98,7 @@ function RegisterScreen() {
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             required
+            autoComplete="current-password"
             type="password"
             placeholder="Enter Password"
             value={confirmPassword}

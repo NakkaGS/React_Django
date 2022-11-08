@@ -9,6 +9,7 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     CART_SAVE_SHIPPING_ADDRESS,
+    CART_SAVE_PAYMENT_METHOD,
 
 } from '../constants/cartConstants' //it is like enum in C
 
@@ -44,6 +45,12 @@ export const cartReducer = (state = {cartItems:[], shippingAddress: {}}, action)
             return {
                 ...state,
                 shippingAddress: action.payload
+            }
+
+        case CART_SAVE_PAYMENT_METHOD:
+            return {
+                ...state,
+                paymentMethod: action.payload
             }
         
         default:

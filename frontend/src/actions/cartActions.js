@@ -4,6 +4,7 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     CART_SAVE_SHIPPING_ADDRESS,
+    CART_SAVE_PAYMENT_METHOD,
 } from '../constants/cartConstants'
 
 //It works like a State Machine
@@ -51,4 +52,15 @@ export const saveShippingAddress = (data) => (dispatch) => {
     
     //it write it back into the localStorage
     localStorage.setItem('shippingAddress', JSON.stringify(data)) //it needs to be a string (stringify)
+}
+
+//////////////////////////////////////////////
+export const savePaymentMethod = (data) => (dispatch) => {
+    dispatch({
+        type: CART_SAVE_PAYMENT_METHOD,
+        payload: data,
+    })
+    
+    //it write it back into the localStorage
+    localStorage.setItem('paymentMethod', JSON.stringify(data)) //it needs to be a string (stringify)
 }
