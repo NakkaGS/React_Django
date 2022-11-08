@@ -5,6 +5,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
+
+//Actions
 import { register } from "../actions/userActions";
 
 //Bootstrap Components
@@ -16,6 +18,8 @@ import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 
 function RegisterScreen() {
+
+  //Initial State Empty (initializing fields)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -29,6 +33,7 @@ function RegisterScreen() {
   const location = useLocation(); //this functions is equal to location.search
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
+  //it goes to store and call the reducer from 'userRegister'. In this reducer we get the following data (error, loading, userInfo)
   const userRegister = useSelector((state) => state.userRegister);
   const { error, loading, userInfo } = userRegister;
 
@@ -38,12 +43,13 @@ function RegisterScreen() {
     }
   }, [history, userInfo, redirect]);
 
+  //when the button is pressed, it executes this line
   const submitHandler = (e) => {
     e.preventDefault();
     if(password !== confirmPassword){
       setMessage('Password do not match')
     }else{
-      dispatch(register(name, email, password)); //it activate the function login
+      dispatch(register(name, email, password)); //it activate the function login in user actions
     }
   };
 

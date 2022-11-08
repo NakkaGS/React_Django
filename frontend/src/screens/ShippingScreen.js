@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from 'react-router-dom'
 
+//Actions
 import { saveShippingAddress } from '../actions/cartActions'
 
 //Bootstrap Components
@@ -17,24 +18,24 @@ import CheckoutSteps from "../components/CheckoutSteps";
 
 function ShippingScreen( ) {
 
+  //it goes to the store and call the reducer 'cart'
   const cart = useSelector(state => state.cart)
   const { shippingAddress} = cart
 
   const dispatch = useDispatch()
   let history = useNavigate() 
   
-
   const [address, setAddress] = useState(shippingAddress.address)
   const [city, setCity] = useState(shippingAddress.city)
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
   const [country, setCountry] = useState(shippingAddress.country)
 
-  const submitHandler = (e) => (
-    e.preventDefault(),
-    dispatch(saveShippingAddress({address, city, postalCode, country})),
-    history('/payment'),//it is using useNavigate, it doesn't need push
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(saveShippingAddress({address, city, postalCode, country}))
+    history('/payment')//it is using useNavigate, it doesn't need push
     console.log('Submitted')
-  )
+  }
 
   return (
     <FormContainer>

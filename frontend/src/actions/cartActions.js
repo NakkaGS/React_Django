@@ -8,6 +8,7 @@ import {
 
 //It works like a State Machine
 //getState - lets get any part of the state (can get a single item)
+//////////////////////////////////////////////
 export const addToCart = (id, qty) => async (dispatch, getState) => { //it is a action
      
     //I dont need the REQUEST and the FAIL
@@ -30,20 +31,24 @@ export const addToCart = (id, qty) => async (dispatch, getState) => { //it is a 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) //it needs to be a string (stringify)
 }
 
+//////////////////////////////////////////////
 export const removeFromCart = (id) => (dispatch, getState) => {
     dispatch({
         type: CART_REMOVE_ITEM,
         payload: id,
     })
 
+    //it write it back into the localStorage
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems)) //it needs to be a string (stringify)
 }
 
+//////////////////////////////////////////////
 export const saveShippingAddress = (data) => (dispatch) => {
     dispatch({
         type: CART_SAVE_SHIPPING_ADDRESS,
         payload: data,
     })
-
+    
+    //it write it back into the localStorage
     localStorage.setItem('shippingAddress', JSON.stringify(data)) //it needs to be a string (stringify)
 }

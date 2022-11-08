@@ -1,4 +1,5 @@
 //App.js->HomeScreen.js->Product.js
+//It show the product with some describition (used in HomeScreen)
 
 import React from 'react'
 

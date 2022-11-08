@@ -14,6 +14,8 @@ import {
 
 //it works like state machine
 //action.payload is the output from the action
+
+//////////////////////////////////////////////
 export const cartReducer = (state = {cartItems:[], shippingAddress: {}}, action) => {
     switch(action.type){
         case CART_ADD_ITEM:

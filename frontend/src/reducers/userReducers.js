@@ -23,11 +23,12 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
-    USER_UPDATE_PROFILE_RESET,
  } from '../constants/userConstants'
 
- //it works like state machine
- //action.payload is the output from the action
+//it works like state machine
+//action.payload is the output from the action
+
+//////////////////////////////////////////////
 export const userLoginReducer = (state = {}, action) => {
     switch(action.type){
         case USER_LOGIN_REQUEST:
@@ -47,8 +48,7 @@ export const userLoginReducer = (state = {}, action) => {
     }
 }
 
-//it works like state machine
-//action.payload is the output from the action
+//////////////////////////////////////////////
 export const userRegisterReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_REGISTER_REQUEST:
@@ -68,8 +68,7 @@ export const userRegisterReducer = (state = {}, action) => {
     }
 }
 
-//it works like state machine
-//action.payload is the output from the action
+//////////////////////////////////////////////
 export const userDetailsReducer = (state = { }, action) => {
     switch (action.type) {
         case USER_DETAILS_REQUEST:
@@ -89,8 +88,7 @@ export const userDetailsReducer = (state = { }, action) => {
     }
 }
 
-//it works like state machine
-//action.payload is the output from the action
+//////////////////////////////////////////////
 export const userUpdateProfileReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_UPDATE_PROFILE_REQUEST:
@@ -101,9 +99,6 @@ export const userUpdateProfileReducer = (state = {}, action) => {
 
         case USER_UPDATE_PROFILE_FAIL:
             return { loading: false, error: action.payload }
-
-        case USER_UPDATE_PROFILE_RESET:
-            return {  }
 
         default:
             return state

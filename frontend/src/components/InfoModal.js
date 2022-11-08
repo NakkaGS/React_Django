@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 //Redux
-import { removeFromCart } from "../actions/cartActions";
 import { useDispatch } from "react-redux";
+
+//Redux - Action
+import { removeFromCart } from "../actions/cartActions";
 
 function InfoModal({ item }) {
 

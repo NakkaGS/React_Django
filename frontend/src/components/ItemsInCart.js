@@ -1,4 +1,8 @@
+//It show the number of the items in the cart as Badge (it is used on the Header)
+
 import React, { useState, useEffect } from "react";
+
+//Boostrap Components
 import { Badge } from "react-bootstrap";
 
 function ItemsInCart() {

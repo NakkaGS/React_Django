@@ -73,10 +73,8 @@ function CartScreen({match}) { //match is used in useParams and history is useNa
                   <Form.Control
                     as='select'
                     value={item.qty} //it must have the same name as in the database attribute
-                    onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
-                  >
+                    onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}>
                     {
-                      
                       [...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
                           {x + 1}

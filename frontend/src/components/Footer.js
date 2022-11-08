@@ -1,4 +1,5 @@
 //index.html->index.js->App.js->Footer.js
+//Page Footer
 
 import React from "react";
 

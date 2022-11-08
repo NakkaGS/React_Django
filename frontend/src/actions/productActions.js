@@ -11,6 +11,7 @@ import {
 } from '../constants/productConstants' //it is like enum in C
 
 //it works like a state machine
+//////////////////////////////////////////////
 export const listProducts = (keyword = '') => async (dispatch) => { //it is a action
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
@@ -31,6 +32,7 @@ export const listProducts = (keyword = '') => async (dispatch) => { //it is a ac
     }
 }
 
+//////////////////////////////////////////////
 export const listProductDetails = (id) => async (dispatch) => { //it is a action
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })

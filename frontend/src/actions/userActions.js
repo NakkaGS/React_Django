@@ -25,16 +25,15 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
-    USER_UPDATE_PROFILE_RESET,
 } from '../constants/userConstants'
 
 //It works like a State Machine
+//////////////////////////////////////////////
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_LOGIN_REQUEST
         })
-
 
         //it was necessary to accept the application/json, it was not allowing to login
         const config = {
@@ -43,7 +42,7 @@ export const login = (email, password) => async (dispatch) => {
                 accept:'application/json'
             }
         }
-
+        //it is a POST and it will send the 'username' and 'password' to the form
         const { data } = await axios.post(
             '/api/users/login/',
             { 'username': email, 'password': password },
@@ -55,6 +54,7 @@ export const login = (email, password) => async (dispatch) => {
             payload: data
         })
 
+        //itn writes the Data into the localStorage
         localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {
@@ -67,12 +67,14 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
+//////////////////////////////////////////////
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({type:USER_LOGOUT})
     dispatch({type:USER_DETAILS_RESET})
 }
 
+//////////////////////////////////////////////
 export const register = (name, email, password) => async (dispatch) => {
     try {
         dispatch({
@@ -111,7 +113,7 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 }
 
-
+//////////////////////////////////////////////
 export const getUserDetails = (id) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -129,7 +131,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo?.token}`
             }
         }
-
+        //in the backend, there is a url (API) that it gets the data from the user
         const { data } = await axios.get(
             `/api/users/${id}/`,
             config
@@ -150,6 +152,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 }
 
+//////////////////////////////////////////////
 export const updateUserProfile = (user) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -161,7 +164,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         } = getState()
 
         const config = {
-            headers: { //It just worked like this for PUT
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
                 "Content-Type": "application/x-www-form-urlencoded",
                 Authorization: `Bearer ${userInfo?.token}`,
             }
@@ -183,6 +186,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             payload: data
         })
 
+        //itn writes the Data into the localStorage
         localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {

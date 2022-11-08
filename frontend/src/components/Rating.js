@@ -1,4 +1,5 @@
 //App.js->HomeScreen.js->Product.js->Rating.js
+//It shows the Product Rating in Stars
 
 import React from "react";
 

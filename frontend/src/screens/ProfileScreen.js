@@ -7,9 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 
-//Constants
-import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
-
 //Bootstrap Components
 import { Form, Button, Row, Col } from "react-bootstrap";
 
@@ -39,18 +36,17 @@ function ProfileScreen() {
 
   useEffect(() => {
     if (!userInfo) {
-        history('/login');
+      history('/login');
     } else {
-        if(!user || !user.name || userInfo._id !== user._id || success){ //that to get the data
-          //console.log(`Before : ${userInfo?.email} and ${userInfo?.name}`)
-          dispatch({ type: USER_UPDATE_PROFILE_RESET })  
-          dispatch(getUserDetails('profile'))
-            //console.log(`Getting data (user name): ${user?.email} and ${user?.name}`)
-        }else{ //after get the data it full fill the data with setName and setEmail
-            //console.log(`Trying to Fullfill field, ${user?.name} and ${user?.email}`)
-            setName(user.name)
-            setEmail(user.email)
-        }
+      if(!user || !user.name || userInfo._id !== user._id || success)
+      { //that to get the data
+        dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
+      }
+      else
+      { //after get the data it full fill the data with setName and setEmail
+        setName(user.name)
+        setEmail(user.email)
+      }
     }
   }, [history, dispatch, user, userInfo, success]);
 
@@ -60,7 +56,8 @@ function ProfileScreen() {
       setMessage("Password do not match");
     } else {
       //console.log('Updating')
-      dispatch(updateUserProfile({
+      //action updateUserProfile = (user)
+      dispatch(updateUserProfile({ 
         'id': user._id,
         'name': name,
         'email': email,

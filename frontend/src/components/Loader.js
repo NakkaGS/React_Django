@@ -2,6 +2,8 @@
 //show when we cant to show that the page is loading something from the Database
 
 import React from 'react'
+
+//Boostrap Components
 import { Spinner } from 'react-bootstrap'
 
 function Loader() {
