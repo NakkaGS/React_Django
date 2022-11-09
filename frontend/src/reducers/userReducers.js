@@ -72,7 +72,7 @@ export const userRegisterReducer = (state = {}, action) => {
 export const userDetailsReducer = (state = { }, action) => {
     switch (action.type) {
         case USER_DETAILS_REQUEST:
-            return { ...state, loading: true }
+            return { ...state, loading: true } //"...state"can only make copies of the original values, and then they can modify the copies.
 
         case USER_DETAILS_SUCCESS:
             return { loading: false, user: action.payload }

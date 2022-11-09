@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect } from 'react'
 
+//Router
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux' 
 //useSelector - allows us to used certain parts of the state/reducer
+
+//Actions
 import { login } from '../actions/userActions'
 
 //Bootstrap Components

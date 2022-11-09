@@ -1,0 +1,42 @@
+#urls.py->product_urls.py->order_view.py
+
+from imp import is_builtin
+from django.shortcuts import render
+
+#Django Rest Framework - Representational state transfer (REST) 
+#In general, RESTful web APIs are loosely based on HTTP methods such as GET, POST, PUT, PATCH, DELETE, OPTIONS. 
+#HTTP requests are used to access data or resources in the web application via URL-encoded parameters. 
+#Responses are generally formatted as either JSON or XML to transmit the data
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response 
+
+#from .products import products #--imports the data from product.py
+from base.models import Product, Order, OrderItem, ShippingAddress #call the data from the Database (Models = Table)
+from base.serializers import ProductSerializer
+
+from rest_framework import status
+
+@api_view(['POST'])
+@permission_classes(['IsAuthenticated'])
+def addOrderItems(request):
+    user = request.user
+    data = request.data
+
+    orderItems = data['orderItems']
+
+    if orderItems and len(orderItems) == 0:
+        return Response({'detail':'No Order Itens'}, status = status.HTTP_400_BAD_REQUEST)
+    else:
+        #(1) Create Order
+        order = Order.objects.create(
+            paymentMethod=data['paymentMethod'],
+            taxPrice=data['taxPrice'],
+            shippingPrice=data['shippingPrice'],
+            totalPrice=data['totalPRice']
+        )
+        #(2) Create shipping address
+        #(3) Create order items and set the order to orderItem relationship
+        #(4) Update stock
+
+    return Response('ORDER')

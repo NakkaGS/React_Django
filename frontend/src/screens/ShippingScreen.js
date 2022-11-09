@@ -1,10 +1,13 @@
+//App.js->Route->ShippingScreen.js
+
 import React, { useState } from "react";
+
+//Router
+import { useNavigate } from 'react-router-dom'
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
-
-import { useNavigate } from 'react-router-dom'
 
 //Actions
 import { saveShippingAddress } from '../actions/cartActions'

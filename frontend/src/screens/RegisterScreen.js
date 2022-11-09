@@ -1,5 +1,8 @@
+//App.js->Route->RegisterScreen.js
+
 import React, { useState, useEffect } from "react";
 
+//Router
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 //Redux

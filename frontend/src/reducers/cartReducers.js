@@ -25,25 +25,25 @@ export const cartReducer = (state = {cartItems:[], shippingAddress: {}}, action)
 
             if(existItem){
                 return {
-                    ...state,
+                    ...state, //can only make copies of the original values, and then they can modify the copies.
                     cartItems: state.cartItems.map(x => 
                         x.product === existItem.product ? item : x)
                 }
             }else{
                 return {
-                    ...state,
+                    ...state, //can only make copies of the original values, and then they can modify the copies.
                     cartItems:[...state.cartItems, item]
                 }
             }
         case CART_REMOVE_ITEM:
             return {
-                ...state,
+                ...state, //can only make copies of the original values, and then they can modify the copies.
                 cartItems: state.cartItems.filter(x => x.product !== action.payload)
             }
 
         case CART_SAVE_SHIPPING_ADDRESS:
             return {
-                ...state,
+                ...state, //can only make copies of the original values, and then they can modify the copies.
                 shippingAddress: action.payload
             }
 

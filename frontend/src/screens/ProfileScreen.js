@@ -1,10 +1,15 @@
+//App.js->Route->ProfileScreen.js
+
 import React, { useState, useEffect } from "react";
 
-import {  useNavigate } from "react-router-dom";
+//Router
+import { useNavigate } from 'react-router-dom'
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
+
+//Actions
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 
 //Bootstrap Components
@@ -56,7 +61,7 @@ function ProfileScreen() {
     if (password !== confirmPassword) {
       setMessage("Password do not match");
     } else {
-      console.log('Updating')
+      //console.log('Updating')
       //action updateUserProfile = (user)
       dispatch(updateUserProfile({ 
         'id': user._id,

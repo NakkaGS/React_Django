@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+//App.js->Route->PlaceOrderScreen.js
+
+import React, { useState, useEffect } from "react";
+
+//Router
+import { Link } from 'react-router-dom'
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
-
-import { useNavigate, Link } from 'react-router-dom'
 
 //Actions
 

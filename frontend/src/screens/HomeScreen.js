@@ -5,6 +5,8 @@ import React, { useEffect } from "react";
 //Redux
 import { useDispatch, useSelector } from 'react-redux' 
 //useSelector - allows us to used certain parts of the state/reducer
+
+//Actions
 import { listProducts } from '../actions/productActions'
 
 //Boostrap Components
@@ -17,6 +19,7 @@ import Message from '../components/Message' //to have the Error in the page
 
 import MainBody from '../components/MainBody'
 
+//Axios
 //import axios from 'axios' //not been used after the Redux application
 //import products from "../products"; //reads the file products.js
 

@@ -2,7 +2,14 @@
 
 import React, { useEffect } from 'react'
 
+//Router
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
+
+//Redux
+import { useDispatch, useSelector } from 'react-redux'
+
+//Actions
+import { addToCart } from '../actions/cartActions'
 
 //Boostrap Components
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
@@ -10,10 +17,6 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 //Components
 import Message from '../components/Message'
 import InfoModal from '../components/InfoModal'
-
-//Redux
-import { addToCart } from '../actions/cartActions'
-import { useDispatch, useSelector } from 'react-redux'
 
 function CartScreen({match}) { //match is used in useParams and history is useNavigate
   let product = useParams(match)
