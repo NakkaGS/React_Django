@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 #from .products import products #--imports the data from product.py
 from base.models import Product, Order, OrderItem, ShippingAddress #call the data from the Database (Models = Table)
-from base.serializers import ProductSerializer
+from base.serializers import ProductSerializer, OrderSerializer
 
 from rest_framework import status
 
@@ -33,10 +33,33 @@ def addOrderItems(request):
             paymentMethod=data['paymentMethod'],
             taxPrice=data['taxPrice'],
             shippingPrice=data['shippingPrice'],
-            totalPrice=data['totalPRice']
+            totalPrice=data['totalPrice']
         )
+        
         #(2) Create shipping address
-        #(3) Create order items and set the order to orderItem relationship
-        #(4) Update stock
+        shipping = ShippingAddress.objects.create(
+            order = order,
+            address = data['shippingAddress']['address'],
+            city = data['shippingAddress']['city'],
+            postalCode = data['shippingAddress']['postalCode'],
+            country = data['shippingAddress']['country'],
+        )
 
-    return Response('ORDER')
+        #(3) Create order items and set the order to orderItem relationship
+        for i in orderItems:
+            product = Product.objects.get(_id=['product'])
+
+            item = OrderItem.objects.create(
+                product=product,
+                order=order,
+                name=product.name,
+                qty=i['qty'],
+                price=i['price'],
+                image=product.image.url,
+            )
+        #(4) Update stock
+        product.countInStock -= item.qty
+        product.save()
+
+    serializer = OrderSerializer(order, many=True)
+    return Response(serializer.data)

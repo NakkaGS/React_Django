@@ -12,6 +12,5 @@ from base.views import order_views as views
 
 #every time that one path is requested it is requested a function
 urlpatterns = [
-
-
+    path('add/', views.addOrderItems, name='orders-add')
 ]
