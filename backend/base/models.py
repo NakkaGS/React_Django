@@ -52,11 +52,11 @@ class Order(models.Model): #it is when the user create a cart and generate a ord
     paidAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     isDelivered = models.BooleanField(default=False)
     deliveredAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
-    createAt = models.DateTimeField(auto_now_add=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self): #used to change the named of the item on the Django Admin Database
-        return str(self.createAt)
+        return str(self.createdAt)
 
 class OrderItem(models.Model): #it is when a order is generated, the order is separated by items. (Items in the Order)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True) #a product can be seen in a lot of Items (Order Items)

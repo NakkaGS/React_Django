@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), #Open the admin website
     path('api/products/', include ('base.urls.product_urls')),
     path('api/users/', include ('base.urls.user_urls')),
-    path('api/orders/', include ('base.urls.order_urls')),
+    path('api/orders/', include('base.urls.order_urls')),
     
     #path('api/', include('base.urls')), #call the urls from the other app
 ]

@@ -43,10 +43,10 @@ function ProfileScreen() {
     if (!userInfo) {
       history('/login');
     } else {
-      if(!user || !user.name || userInfo._id !== user._id || !success)
+      if(!user || !user.name || userInfo._id !== user._id)
       { //that to get the data
         dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
-        //console.log("Getting Data")
+        console.log("Getting Data")
       }
       else
       { //after get the data it full fill the data with setName and setEmail

@@ -1,16 +1,16 @@
 //App.js->Route->PlaceOrderScreen.js
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 //Router
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Actions
-
+import { createOrder } from '../actions/orderActions'
 
 //Bootstrap Components
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
@@ -20,19 +20,45 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
 
 function PlaceOrderScreen() {
+    let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
+    //////////
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, error, success } = orderCreate
+
+    //////////
     const cart = useSelector(state => state.cart) 
 
     cart.itemsPrice = cart.cartItems.reduce((accu, item) => accu + item.price * item.qty, 0).toFixed(2)
-
     cart.shippingPrice = (cart.ItemsPrice > 100 ? 0 : 10).toFixed(2)
-
     cart.taxPrice = Number((0.082) * cart.itemsPrice).toFixed(2)
-
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
+    //////////
+    if(!cart.paymentMethod){
+        history('/payment')
+    }
+
+    //////////
+    useEffect(() => {
+        if (success) {
+            history(`/order/${order?._id}`);
+        }
+    }, [success, history]) //effects is used when one of the parameters is updated
+
+    //////////
+    const dispatch = useDispatch()
+
     const placeOrder = () => {
-        console.log('Place Order')
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice,
+        }))
     }
 
     return (
@@ -128,6 +154,10 @@ function PlaceOrderScreen() {
                                 <Col>Total: </Col>
                                 <Col>${cart.totalPrice}</Col>
                             </Row>
+                        </ListGroup.Item>
+
+                        <ListGroup.Item>
+                            {error && <Message variant='danger'>{error}</Message>}
                         </ListGroup.Item>
                         
                         <ListGroup.Item>
