@@ -17,7 +17,7 @@ import Product from '../components/Product'; //import the component Product
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
 
-import MainBody from '../components/MainBody'
+import ProductsCarousel from '../components/ProductsCarousel'
 
 //Axios
 //import axios from 'axios' //not been used after the Redux application
@@ -50,8 +50,7 @@ function HomeScreen() {
   return (
     <div>
 
-      <MainBody/>
-
+      <ProductsCarousel/>
       
       <h1>Latest Products</h1>
 

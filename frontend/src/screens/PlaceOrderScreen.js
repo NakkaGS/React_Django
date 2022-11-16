@@ -19,6 +19,7 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
 
+//Constants
 import { ORDER_CREATE_FAIL } from '../constants/orderConstants'
 
 function PlaceOrderScreen() {
