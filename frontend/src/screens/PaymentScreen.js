@@ -23,7 +23,7 @@ function PaymentScreen() {
 
   //it goes to the store and call the reducer 'cart'
   const cart = useSelector(state => state.cart)
-  const { shippingAddress} = cart
+  const { shippingAddress } = cart
 
   const dispatch = useDispatch()
   let history = useNavigate() 

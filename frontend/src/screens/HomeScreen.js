@@ -27,6 +27,7 @@ function HomeScreen() {
   //const [products, setProducts] = useState([]) //not been used after the Redux application
 
   const dispatch = useDispatch()
+
   const productList = useSelector(state => state.productList)
   const {error, loading, products} = productList 
   //separate the data from the productList
@@ -48,7 +49,10 @@ function HomeScreen() {
  
   return (
     <div>
-      <MainBody />
+
+      <MainBody/>
+
+      
       <h1>Latest Products</h1>
 
       {loading ? <Loader /> //it is to create the loadin and error view 

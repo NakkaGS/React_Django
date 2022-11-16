@@ -2,8 +2,7 @@
 
 from imp import is_builtin
 from django.shortcuts import render
-
-from django.http import QueryDict
+import json
 
 #Django Rest Framework - Representational state transfer (REST) 
 #In general, RESTful web APIs are loosely based on HTTP methods such as GET, POST, PUT, PATCH, DELETE, OPTIONS. 
@@ -15,13 +14,15 @@ from rest_framework.response import Response
 
 #from .products import products #--imports the data from product.py
 from base.models import Product, Order, OrderItem, ShippingAddress #call the data from the Database (Models = Table)
-from base.serializers import ProductSerializer, OrderSerializer
+from base.serializers import OrderSerializer
 
 from rest_framework import status
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def addOrderItems(request):
+
+    print(json.load(request.body)) 
     user = request.user
     data = request.data
 
@@ -29,14 +30,9 @@ def addOrderItems(request):
 
     print('////////////////////////////////////////////////////////')
 
-    q = QueryDict('', mutable=True)
+    orderItems = data
 
-    q['orderItems'] = data.get('orderItems')
-    
-
-    orderItems = data.get('orderItems')
-
-    print(q)
+    print(request.body)
 
     if orderItems and len(orderItems) == 0:
         return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
