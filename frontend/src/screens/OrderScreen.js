@@ -1,6 +1,6 @@
 //App.js->Route->PlaceOrderScreen.js
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //Router
 import { Link, useParams } from 'react-router-dom'
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Actions
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, payOrder } from '../actions/orderActions'
 
 //Bootstrap Components
 import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
@@ -19,12 +19,24 @@ import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Message";
 
+//Paypal Button
+import { PayPalButton } from 'react-paypal-button-v2'
+
+//Constant
+import { ORDER_PAY_RESET } from '../constants/orderConstants'
+
 function OrderScreen({ match }) {
     const dispatch = useDispatch()
+
+    const [sdkReady, setSdkReady] = useState(false)
 
     //////////
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, error, loading } = orderDetails
+
+    //////////
+    const orderPay = useSelector(state => state.orderPay)
+    const { loading: loadingPay, success:successPay } = orderPay
 
     //////////
     if(!loading && !error){
@@ -35,15 +47,38 @@ function OrderScreen({ match }) {
     let { id } = useParams(match); //get the Product ID //it must be id (orderID doest work, i dont know why)
     
     /////////
-    useEffect(() => {
 
-        if(!order || order?._id !== Number(id)) {
-            dispatch(getOrderDetails(id))
+    const addPayPalScript = () =>
+    {
+        const script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = 'https://www.paypal.com/sdk/js?client-id=Ae8QQlGXdr87ZA8LHzuTTo6dp_1FjuHLb6xgX7S5ct8NavJDKIjdrXbd39MSBowqSrXGj2oQ5cWFPPZL'
+        script.async = true
+        script.onload = () => {
+            setSdkReady(true)
         }
-        
-
-    }, [order, id, dispatch, order?._id]) //effects is used when one of the parameters is updated
+        document.body.appendChild(script)
+    }
+    ////////
+    useEffect(() => {
+        if (!order || successPay || order?._id !== Number(id)) {
+            dispatch(getOrderDetails(id))
+            dispatch({type: ORDER_PAY_RESET})
+        }else if(!order.isPaid){
+            if(!window.paypal){
+                addPayPalScript()
+            }else{
+                setSdkReady(true)
+            }
+        }
+    }, [order, id, dispatch, order?._id, successPay]) //effects is used when one of the parameters is updated
     
+    ////////
+    const successPaymentHandler = (paymentResult) => {
+        dispatch(payOrder(id, paymentResult))
+    }
+
+
     //console.log(order)
     return loading ? (
         <Loader/>
@@ -157,6 +192,22 @@ function OrderScreen({ match }) {
                                 <Col>${order.totalPrice}</Col>
                             </Row>
                         </ListGroup.Item>
+
+                        {!order.isPaid && (
+                            <ListGroup.Item>
+                                {loadingPay && <Loader />}
+
+                                {!sdkReady ? (
+                                    <Loader/>
+                                ): (
+                                    <PayPalButton 
+                                        amount={order.totalPrice}
+                                        onSuccess={successPaymentHandler}
+
+                                    />
+                                )}
+                            </ListGroup.Item>
+                        )}
 
                     </ListGroup>
                 </Card>                      
