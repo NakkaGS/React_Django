@@ -66,12 +66,16 @@ def registerUser(request):
         message = {'detail': 'User with this email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
+#################
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) #It blocks the request to get data for just those who is authenticated
 def getUserProfile(request):
     user = request.user
     serializer = UserSerializer(user, many=False) #show just one Item
     return Response(serializer.data)
+
+#################
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated]) #It blocks the request to get data for just those who is authenticated
@@ -91,12 +95,16 @@ def updateUserProfile(request):
 
     return Response(serializer.data)
 
+#################
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserById(request, pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
+
+#################
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])

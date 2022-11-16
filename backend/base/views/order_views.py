@@ -4,6 +4,8 @@ from imp import is_builtin
 from django.shortcuts import render
 from django.http import QueryDict
 
+from datetime import datetime
+
 #Django Rest Framework - Representational state transfer (REST) 
 #In general, RESTful web APIs are loosely based on HTTP methods such as GET, POST, PUT, PATCH, DELETE, OPTIONS. 
 #HTTP requests are used to access data or resources in the web application via URL-encoded parameters. 
@@ -73,6 +75,8 @@ def addOrderItems(request):
         serializer = OrderSerializer(order, many=False)
         return Response(serializer.data)
 
+#################
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getOrderByID(request, pk):
@@ -88,3 +92,16 @@ def getOrderByID(request, pk):
 
     except:
             return Response({'detail': 'Order does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+#################
+
+@api_view(['PUT']) #PUT just update a data in SQL and POST create a data
+@permission_classes([IsAuthenticated])
+def updateOrderToPaid(request, pk):
+    order = Order.objects.get(_id=pk)
+
+    order.isPaid = True
+    order.paidAt = datetime.now()
+    order.save()
+    
+    return Response('Order was paid')

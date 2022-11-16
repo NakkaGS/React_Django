@@ -14,4 +14,5 @@ from base.views import order_views as views
 urlpatterns = [
     path('add/', views.addOrderItems, name='orders-add'),
     path('<str:pk>/', views.getOrderByID, name='user-oder'),
+    path('<str:pk>/pay/', views.updateOrderToPaid, name='pay'),
 ]

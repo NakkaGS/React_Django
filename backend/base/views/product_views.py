@@ -23,6 +23,8 @@ def getProducts(request):
     serializer = ProductSerializer(products, many=True) #show many 'products'
     return Response(serializer.data)
 
+#################
+
 #it is used to show the product requested in the HomeScreen, it is used in ProductScreen
 @api_view(['GET'])
 def getProduct(request, pk):
