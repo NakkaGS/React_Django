@@ -5,9 +5,9 @@ import {
     ORDER_CREATE_SUCCESS,
     ORDER_CREATE_FAIL,
 
-    ORDER_DETAIL_REQUEST,
-    ORDER_DETAIL_SUCCESS,
-    ORDER_DETAIL_FAIL,
+    ORDER_DETAILS_REQUEST,
+    ORDER_DETAILS_SUCCESS,
+    ORDER_DETAILS_FAIL,
 } from '../constants/orderConstants'
 
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
@@ -71,8 +71,9 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         //Huge Problem with the orderItem was because it must be "Content-Type": "application/json", in orderActions
         const config = {
             headers: { 
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo?.token}`,
+                'Content-type': 'application/json',
+                accept: 'application/json',
+                Authorization: `Bearer ${userInfo?.token}`
             }
         }
 

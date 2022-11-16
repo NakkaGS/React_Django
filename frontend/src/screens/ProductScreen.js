@@ -26,6 +26,7 @@ import Message from '../components/Message'
 //it was necessary to add '?' every time that we want to get a attribute from the product
 
 function ProductScreen({ match }) {
+  
   const [qty, setQty] = useState(1)
 
   let history = useNavigate() //for V6 it is useNavigate, NOT useHistory
@@ -40,6 +41,8 @@ function ProductScreen({ match }) {
   //useParams returns the key of the  current <Route> (App.js - <Route path='product/:id'...> in this case id)
   let { id } = useParams(match); //get the Product ID
   //const product = products.find((p) => p._id === id); //find the related product using the id
+
+  console.log(id)
 
   useEffect( () => {
     dispatch(listProductDetails(id))
@@ -146,7 +149,6 @@ function ProductScreen({ match }) {
                       </ListGroup.Item>
                     )                 
                   }
-                  {console.log(product?.countInStock)}
                   <ListGroup.Item>
                     <Button 
                       onClick={addtoCardHandler}

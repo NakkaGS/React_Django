@@ -19,6 +19,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
 
 //it is equal to <body>
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route path='product/:id' element={<ProductScreen/>} />
 
               <Route path='cart' element={<CartScreen/>} /> {/* The new version we need to write all the possible links */}
+              
               <Route path='cart/:id' element={<CartScreen/>} /> 
 
               <Route path='login' element={<LoginScreen/>} />
@@ -48,6 +50,8 @@ function App() {
               <Route path='payment' element={<PaymentScreen/>} />
             
               <Route path='placeorder' element={<PlaceOrderScreen/>} />
+
+              <Route path='order/:id' element={<OrderScreen/>} />
 
             </Routes>
           </Container>
