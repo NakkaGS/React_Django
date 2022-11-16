@@ -19,6 +19,8 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
 
+import { ORDER_CREATE_FAIL } from '../constants/orderConstants'
+
 function PlaceOrderScreen() {
     let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
@@ -39,16 +41,18 @@ function PlaceOrderScreen() {
         history('/payment')
     }
 
+    const dispatch = useDispatch()
+
     //////////
     useEffect(() => {
         if (success) {
             history(`/order/${order?._id}`);
+            dispatch({type: ORDER_CREATE_FAIL}) //reset the order state
+
         }
-    }, [success, history]) //effects is used when one of the parameters is updated
+    }, [success, history, dispatch, order._id]) //effects is used when one of the parameters is updated
 
     //////////
-    const dispatch = useDispatch()
-
     const placeOrder = () => {
         dispatch(createOrder({
             orderItems: cart.cartItems,

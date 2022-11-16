@@ -146,12 +146,12 @@ function ProductScreen({ match }) {
                       </ListGroup.Item>
                     )                 
                   }
-    
+                  {console.log(product?.countInStock)}
                   <ListGroup.Item>
                     <Button 
                       onClick={addtoCardHandler}
                       className='btn-block' 
-                      disabled={product?.countInStock === 0} 
+                      disabled={product?.countInStock === 0 || product?.countInStock < 0} 
                       type='button'>
                       Add to Cart
                     </Button>

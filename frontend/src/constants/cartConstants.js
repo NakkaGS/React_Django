@@ -9,3 +9,6 @@ export const CART_SAVE_SHIPPING_ADDRESS = 'CART_SAVE_SHIPPING_ADDRESS'
 
 //showed in Payment
 export const CART_SAVE_PAYMENT_METHOD = 'CART_SAVE_PAYMENT_METHOD'
+
+//showed in PlaceOrder
+export const CART_CLEAR_ITEMS = 'CART_CLEAR_ITEMS'
