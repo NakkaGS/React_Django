@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { cartReducer } from './reducers/cartReducers'
 import { productListReducer, productDetailsReducer } from './reducers/productReducers'
 import { userLoginReducer , userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers'
-import { orderCreateReducer, orderDetailsReducer } from './reducers/orderReducers'
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer } from './reducers/orderReducers'
 
 
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
@@ -23,6 +23,7 @@ const reducer = combineReducers({
 
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
 })
 
 //get the data from the Local Storage
