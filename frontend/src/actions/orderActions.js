@@ -17,9 +17,10 @@ export const createOrder = (order) => async (dispatch, getState) => {
             userLogin: { userInfo },
         } = getState()
 
+        //Huge Problem with the orderItem was because of the "Content-Type": "application/json", in orderActions
         const config = {
-            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
-                "Content-Type": "application/x-www-form-urlencoded",
+            headers: { 
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${userInfo?.token}`,
             }
         }

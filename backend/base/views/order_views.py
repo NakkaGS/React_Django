@@ -2,7 +2,7 @@
 
 from imp import is_builtin
 from django.shortcuts import render
-import json
+from django.http import QueryDict
 
 #Django Rest Framework - Representational state transfer (REST) 
 #In general, RESTful web APIs are loosely based on HTTP methods such as GET, POST, PUT, PATCH, DELETE, OPTIONS. 
@@ -22,17 +22,11 @@ from rest_framework import status
 @permission_classes([IsAuthenticated])
 def addOrderItems(request):
 
-    print(json.load(request.body)) 
     user = request.user
     data = request.data
-
-    print(data)
-
-    print('////////////////////////////////////////////////////////')
-
-    orderItems = data
-
-    print(request.body)
+    
+    orderItems = data['orderItems']
+    #Huge Problem with the orderItem was because it must be "Content-Type": "application/json", in orderActions
 
     if orderItems and len(orderItems) == 0:
         return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
