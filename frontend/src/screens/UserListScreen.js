@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Actions
-import { listUsers } from "../actions/userActions";
+import { listUsers, deleteUser } from "../actions/userActions";
 
 //Bootstrap Components
 import { Table, Button } from "react-bootstrap";
@@ -32,9 +32,13 @@ function UserListScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const userDelete = useSelector(state => state.userDelete)
+    const { success:successDelete } = userDelete
+
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure you want to delete this user?')){
-            console.log('DELETE: ', id)
+            //console.log('DELETE: ', id)
+            dispatch(deleteUser(id))
         }
      }
 
@@ -45,7 +49,7 @@ function UserListScreen() {
             history('/login')//it is using useNavigate, it doesn't need push
         }
         
-    }, [dispatch, history, userInfo]);
+    }, [dispatch, history, userInfo, successDelete]);
 
     return (
     <div>
