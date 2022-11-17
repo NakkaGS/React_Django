@@ -106,12 +106,34 @@ def getUserById(request, pk):
 
 #################
 
+@api_view(['PUT'])
+@permission_classes([IsAdminUser]) #It blocks the request to get data for just those who is authenticated
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+
+    data = request.data
+
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['isAdmin']
+    
+    user.save()
+
+    serializer = UserSerializerWithToken(user, many=False) #show just one Item
+
+    return Response(serializer.data)
+
+#################
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUsers(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
+
+#################
 
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
