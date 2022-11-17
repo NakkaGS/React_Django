@@ -21,6 +21,7 @@ import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import UserListScreen from './screens/UserListScreen'
+import UserEditScreen from './screens/UserEditScreen'
 
 //it is equal to <body>
 function App() {
@@ -56,6 +57,7 @@ function App() {
 
               <Route path='admin/userlist' element={<UserListScreen/>} />
 
+              <Route path='admin/user/:id/edit' element={<UserEditScreen/>} />
             </Routes>
           </Container>
         </main>

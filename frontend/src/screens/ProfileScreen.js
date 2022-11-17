@@ -57,7 +57,7 @@ function ProfileScreen() {
     } else {
       if(!user || !user.name || userInfo._id !== user._id)
       { //that to get the data
-        dispatch({ type: USER_UPDATE_PROFILE_RESET})
+        dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile
         dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
         dispatch(listMyOrders())
         //console.log("Getting Data")
