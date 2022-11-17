@@ -25,6 +25,11 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
+
+    USER_LIST_REQUEST,
+    USER_LIST_SUCCESS,
+    USER_LIST_FAIL,
+    USER_LIST_RESET,
 } from '../constants/userConstants'
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
@@ -75,7 +80,8 @@ export const logout = () => (dispatch) => {
 
     dispatch({type: USER_LOGOUT})
     dispatch({type: USER_DETAILS_RESET})
-    dispatch({type: ORDER_LIST_MY_RESET})
+    dispatch({type: ORDER_LIST_MY_RESET}) //reset all the myList data
+    dispatch({type: USER_LIST_RESET}) //reset all the userList data
 
 }
 
@@ -197,6 +203,45 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
+export const getUserList = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_LIST_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                accept: 'application/json',
+                Authorization: `Bearer ${userInfo?.token}`
+            }
+        }
+        //in the backend, there is a url (API) that it gets the data from the user
+        const { data } = await axios.get(
+            `/api/users/`,
+            config
+        )
+
+        dispatch({
+            type: USER_LIST_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: USER_LIST_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
