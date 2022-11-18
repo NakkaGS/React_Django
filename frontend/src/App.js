@@ -23,6 +23,8 @@ import OrderScreen from "./screens/OrderScreen";
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 
+import OrderListScreen from './screens/OrderListScreen'
+
 //it is equal to <body>
 function App() {
   return (
@@ -53,11 +55,14 @@ function App() {
             
               <Route path='placeorder' element={<PlaceOrderScreen/>} />
 
-              <Route path='/order/:id' component={OrderScreen} />
+              <Route path='/order/:id' component={<OrderScreen />} />
 
               <Route path='admin/userlist' element={<UserListScreen/>} />
 
               <Route path='admin/user/:id/edit' element={<UserEditScreen/>} />
+
+              <Route path='admin/orderlist' element={<OrderListScreen/>} />
+
             </Routes>
           </Container>
         </main>

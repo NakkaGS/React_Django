@@ -43,7 +43,6 @@ const reducer = combineReducers({
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
 
-
 })
 
 //get the data from the Local Storage
