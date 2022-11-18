@@ -188,3 +188,43 @@ export const listMyOrders = () => async (dispatch, getState) => {
         })
     }
 }
+
+//////////////////////////////////////////////
+export const listOrders = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ORDER_LIST_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo }, //that is to get the token
+        } = getState()
+
+        //Huge Problem with the orderItem was because it must be "Content-Type": "application/json", in orderActions
+        const config = {
+            headers: { 
+                'Content-type': 'application/json',
+                accept: 'application/json',
+                Authorization: `Bearer ${userInfo?.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `/api/orders/`,
+            config
+        )
+
+        dispatch({
+            type: ORDER_LIST_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ORDER_LIST_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
