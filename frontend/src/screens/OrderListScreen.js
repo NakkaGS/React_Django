@@ -32,14 +32,10 @@ function OrderListScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    console.log(userInfo)
-
     useEffect(() => {
         dispatch(listOrders())
-        console.log('Getting Data')
         if(userInfo && userInfo.isAdmin){
             dispatch(listOrders())
-            console.log('Getting Data')
         }else{
             history('/login')//it is using useNavigate, it doesn't need push
         }
