@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 //Reducers
 import { cartReducer } from './reducers/cartReducers'
 import { productListReducer, productDetailsReducer } from './reducers/productReducers'
+
 import {    userLoginReducer, 
             userRegisterReducer, 
             userDetailsReducer, 
@@ -12,7 +13,12 @@ import {    userLoginReducer,
             userListReducer, 
             userDeleteReducer,
             userUpdateReducer } from './reducers/userReducers'
-import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducers'
+
+import {    orderCreateReducer,
+            orderDetailsReducer,
+            orderPayReducer, 
+            orderListMyReducer,
+            orderListReducer } from './reducers/orderReducers'
 
 
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
@@ -31,9 +37,13 @@ const reducer = combineReducers({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
-    orderListMy: orderListMyReducer,
+    orderListMy: orderListMyReducer, //orders from the logged user
+    orderList: orderListReducer, //orders from all users (just admin)
+
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
+
+
 })
 
 //get the data from the Local Storage
@@ -55,7 +65,6 @@ const initialState = {
             shippingAddress: shippingAddressFromStorage 
             },
     userLogin: { userInfo: userInfoFromStorage},
-
 }
 
 const middleware = [thunk]
