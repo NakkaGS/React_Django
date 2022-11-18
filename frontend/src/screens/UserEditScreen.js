@@ -56,12 +56,10 @@ function EditUserScreen({ match }) {
             
             if(!user?.name || user?._id !== Number(id)){
                 dispatch(getUserDetails(id))
-                console.log("Getting Data")
             } else {
                 setName(user?.name)
                 setEmail(user?.email)
                 setIsAdmin(user?.isAdmin)
-                console.log("Setting Data")
             }
         }
 

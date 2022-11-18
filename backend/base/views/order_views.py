@@ -11,7 +11,7 @@ from datetime import datetime
 #HTTP requests are used to access data or resources in the web application via URL-encoded parameters. 
 #Responses are generally formatted as either JSON or XML to transmit the data
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response 
 
 #from .products import products #--imports the data from product.py
@@ -115,3 +115,10 @@ def updateOrderToPaid(request, pk):
     order.save()
     
     return Response('Order was paid')
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getOrders(request):
+    orders = Order.objects.all() #show all the products
+    serializer = OrderSerializer(orders, many=True) #show many 'products'
+    return Response(serializer.data)
