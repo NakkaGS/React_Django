@@ -1,4 +1,4 @@
-//App.js->Route->UserListScreen.js
+//App.js->Route->ProductListScreen.js
 
 import React, { useEffect } from "react";
 
@@ -89,7 +89,6 @@ function ProductListScreen() {
                             ))}
                         </tbody>
                     </Table>
-                        
                 )
         }
     </div>

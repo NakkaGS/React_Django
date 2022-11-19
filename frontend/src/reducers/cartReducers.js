@@ -18,7 +18,8 @@ import {
 //action.payload is the output from the action
 
 //////////////////////////////////////////////
-export const cartReducer = (state = {cartItems:[], shippingAddress: {}}, action) => {
+
+export const cartReducer = (state = { cartItems:[], shippingAddress: {} }, action) => {
     switch(action.type){
         case CART_ADD_ITEM:
             const item = action.payload //it gets the infos set on the cartActions - payload

@@ -19,7 +19,8 @@ import {
 //action.payload is the output from the action
 
 //////////////////////////////////////////////
-export const productListReducer = (state = {products:[]}, action) => {
+
+export const productListReducer = (state = { products:[]}, action ) => {
     switch(action.type){
         case PRODUCT_LIST_REQUEST: //it set the state loading to true and clear all the products
             return {loading:true, products: []}
@@ -37,7 +38,7 @@ export const productListReducer = (state = {products:[]}, action) => {
 
 //////////////////////////////////////////////
 
-export const productDetailsReducer = (state = {products: {reviews:[]}}, action) => {
+export const productDetailsReducer = (state = { products: {reviews:[]} }, action) => {
     switch(action.type){
         case PRODUCT_DETAILS_REQUEST:
             return {loading: true, ...state, product: []} //"...state"can only make copies of the original values, and then they can modify the copies.

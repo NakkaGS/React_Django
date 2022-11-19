@@ -1,4 +1,4 @@
-//App.js->Route->UserListScreen.js
+//App.js->Route->OrderListScreen.js
 
 import React, { useEffect } from "react";
 
@@ -54,12 +54,12 @@ function OrderListScreen() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Total Price</th>
-                                <th>Paid</th>
-                                <th>Paid At</th>
-                                <th>Delivered</th>
-                                <th>Delivered At</th>
+                                <th>NAME</th>
+                                <th>TOTAL PRICE</th>
+                                <th>PAID</th>
+                                <th>PAID AT</th>
+                                <th>DELIVERED</th>
+                                <th>DELIVERED AT</th>
                                 <th></th>
                             </tr>
 
@@ -73,7 +73,7 @@ function OrderListScreen() {
                                     <td>{order?._id}</td>
                                     <td>{order?.user.name}</td>
                                     <td>{order?.totalPrice}</td>
-                                    <td>{order.isPaid ? (
+                                    <td>{order?.isPaid ? (
                                         <i className="fas fa-check" style={{color: 'green'}}></i>
                                         ) : (
                                         <i className="fas fa-xmark" style={{color: 'red'}}></i>

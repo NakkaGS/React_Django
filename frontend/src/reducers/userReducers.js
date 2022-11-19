@@ -45,7 +45,7 @@ import {
 
 //////////////////////////////////////////////
 
-export const userLoginReducer = (state = { }, action) => {
+export const userLoginReducer = (state = {}, action) => {
     switch(action.type){
         case USER_LOGIN_REQUEST:
             return { loading: true }
@@ -66,7 +66,7 @@ export const userLoginReducer = (state = { }, action) => {
 
 //////////////////////////////////////////////
 
-export const userRegisterReducer = (state = { }, action) => {
+export const userRegisterReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_REGISTER_REQUEST:
             return { loading: true }
@@ -87,7 +87,7 @@ export const userRegisterReducer = (state = { }, action) => {
 
 //////////////////////////////////////////////
 
-export const userDetailsReducer = (state = { }, action) => {
+export const userDetailsReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_DETAILS_REQUEST:
             return { ...state, loading: true } //"...state"can only make copies of the original values, and then they can modify the copies.
@@ -108,7 +108,7 @@ export const userDetailsReducer = (state = { }, action) => {
 
 //////////////////////////////////////////////
 
-export const userUpdateProfileReducer = (state = { }, action) => {
+export const userUpdateProfileReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_UPDATE_PROFILE_REQUEST:
             return { loading: true }
@@ -150,7 +150,7 @@ export const userListReducer = (state = { users:[] }, action) => {
 
 //////////////////////////////////////////////
 
-export const userDeleteReducer = (state = { }, action) => {
+export const userDeleteReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_DELETE_REQUEST:
             return { loading: true }
