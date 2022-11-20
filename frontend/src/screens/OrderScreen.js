@@ -63,6 +63,7 @@ function OrderScreen({ match }) {
     useEffect(() => {
         if (!order || successPay || order?._id !== Number(id)) {
             dispatch(getOrderDetails(id))
+            //console.log('Getting Data')
             dispatch({type: ORDER_PAY_RESET})
         }else if(!order.isPaid){
             if(!window.paypal){

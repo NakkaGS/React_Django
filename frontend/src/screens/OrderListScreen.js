@@ -65,8 +65,6 @@ function OrderListScreen() {
 
                         </thead>
 
-                        {console.log(orders)}
-
                         <tbody>
                             {orders.map(order => (
                                 <tr key={order?._id}>

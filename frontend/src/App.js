@@ -19,10 +19,11 @@ import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
+
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 
+import OrderScreen from "./screens/OrderScreen";
 import OrderListScreen from './screens/OrderListScreen'
 import ProductListScreen from "./screens/ProductListScreen";
 
@@ -56,7 +57,7 @@ function App() {
             
               <Route path='placeorder' element={<PlaceOrderScreen/>} />
 
-              <Route path='/order/:id' component={<OrderScreen />} />
+              <Route path='order/:id' element={<OrderScreen />} />
 
               <Route path='admin/userlist' element={<UserListScreen/>} />
 

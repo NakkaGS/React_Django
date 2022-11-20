@@ -34,7 +34,7 @@ function ProductListScreen() {
     const { userInfo } = userLogin
 
     useEffect(() => {
-        console.log('Getting Data')
+        //console.log('Getting Data')
         if(userInfo && userInfo.isAdmin){
             dispatch(listProducts())
         }else{
