@@ -21,7 +21,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class ProductSerializer(serializers.ModelSerializer): #take all the model (Table) and converts to js
     class Meta:
         model = Product
-        fields = '__all__'\
+        fields = '__all__'
             
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)

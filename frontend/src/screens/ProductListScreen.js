@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from '../actions/productActions'
 
 //Bootstrap Components
-import { Table, Button, Badge } from "react-bootstrap";
+import { Table, Button, Badge, Col, Row } from "react-bootstrap";
 
 //Components
 import Loader from "../components/Loader";
@@ -33,6 +33,13 @@ function ProductListScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const deleteHandler = (id) => {
+        if (window.confirm('Are you sure you want to delete this product?')){
+            //console.log('DELETE: ', id)
+            //dispatch(deleteUser(id))
+        }
+     }
+
     useEffect(() => {
         //console.log('Getting Data')
         if(userInfo && userInfo.isAdmin){
@@ -45,7 +52,18 @@ function ProductListScreen() {
 
     return (
     <div>
-        <h1>Products</h1>
+        <Row className='align-items-center'>
+            <Col>
+                <h1>Products</h1>
+            </Col>
+            <Col className='text-right'>
+                <Button className='my-3' >
+                        <i className='fas fa-plus'></i> Create Product
+                </Button>
+            </Col>
+            
+        </Row>
+        
         {loading
             ? (<Loader />)
             : error 
@@ -81,7 +99,7 @@ function ProductListScreen() {
                                             </Button>
                                         </LinkContainer>
 
-                                        <Button variant='danger' className='btn-sm'>
+                                        <Button variant='danger' className='btn-sm' onClick={deleteHandler}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </td>
