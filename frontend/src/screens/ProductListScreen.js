@@ -19,6 +19,7 @@ import { Table, Button, Badge, Col, Row } from "react-bootstrap";
 //Components
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import MessageTimer from "../components/MessageTimer";
 
 function ProductListScreen() {
 
@@ -31,7 +32,7 @@ function ProductListScreen() {
     //separate the data from the productList
 
     const productDelete = useSelector(state => state.productDelete)
-    const {errorDelete, loadingDelete} = productDelete 
+    const {error: errorDelete, success: successDelete} = productDelete 
     //separate the data from the productList
 
     const userLogin = useSelector(state => state.userLogin)
@@ -52,16 +53,18 @@ function ProductListScreen() {
             history('/login')//it is using useNavigate, it doesn't need push
         }
         
-    }, [dispatch, history, userInfo]);
+    }, [dispatch, history, userInfo, successDelete]);
 
     return (
     <div>
         <Row className='align-items-center'>
             <Col>
                 <h1>Products</h1>
-                {loadingDelete && <Message variant='success'>{error}</Message>}
-                {error && <Message variant='danger'>{error}</Message>}
             </Col>
+            <Col>
+                {successDelete && <MessageTimer variant='success'>Product Deleted</MessageTimer>}
+                {errorDelete && <Message variant='danger'>{error}</Message>}
+            </Col> 
             <Col className='text-right'>
                 <Button className='my-3' >
                         <i className='fas fa-plus'></i> Create Product

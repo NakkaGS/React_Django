@@ -16,6 +16,7 @@ import { Row, Col } from "react-bootstrap"; //installed using the console
 import Product from '../components/Product'; //import the component Product
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
+import MessageTimer from '../components/MessageTimer' //to have the Error in the page
 
 import ProductsCarousel from '../components/ProductsCarousel'
 
@@ -50,7 +51,7 @@ function HomeScreen() {
   return (
     <div>
 
-      {(!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> : <ProductsCarousel/>}
+      {(!loading && Object.keys(productList.products).length === 0) ? <MessageTimer variant='info'>No Products</MessageTimer> : <ProductsCarousel/>}
       
       <h1>Latest Products</h1>
 
