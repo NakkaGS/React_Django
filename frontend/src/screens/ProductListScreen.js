@@ -30,6 +30,10 @@ function ProductListScreen() {
     const {error, loading, products} = productList 
     //separate the data from the productList
 
+    const productDelete = useSelector(state => state.productDelete)
+    const {errorDelete, loadingDelete} = productDelete 
+    //separate the data from the productList
+
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -55,6 +59,8 @@ function ProductListScreen() {
         <Row className='align-items-center'>
             <Col>
                 <h1>Products</h1>
+                {loadingDelete && <Message variant='success'>{error}</Message>}
+                {error && <Message variant='danger'>{error}</Message>}
             </Col>
             <Col className='text-right'>
                 <Button className='my-3' >

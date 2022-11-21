@@ -50,19 +50,20 @@ function HomeScreen() {
   return (
     <div>
 
-      <ProductsCarousel/>
+      {(!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> : <ProductsCarousel/>}
       
       <h1>Latest Products</h1>
 
       {loading ? <Loader /> //it is to create the loadin and error view 
-            :error ? <Message variant='danger'>{error}</Message>
+            : error ? <Message variant='danger'>{error}</Message>
+              : (!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> 
               :
-              <Row>
-              {products?.map(product => ( //it was added ? because it was given fault. It is first asking if the array existed 
-                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                  <Product product={product} />
-                </Col>
-              ))}
+                <Row>
+                {products?.map(product => ( //it was added ? because it was given fault. It is first asking if the array existed 
+                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Product product={product} />
+                  </Col>
+                ))}
               </Row>
           }
 
