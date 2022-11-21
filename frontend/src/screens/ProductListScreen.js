@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Actions
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct } from '../actions/productActions'
 
 //Bootstrap Components
 import { Table, Button, Badge, Col, Row } from "react-bootstrap";
@@ -36,7 +36,7 @@ function ProductListScreen() {
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure you want to delete this product?')){
             //console.log('DELETE: ', id)
-            //dispatch(deleteUser(id))
+            dispatch(deleteProduct(id))
         }
      }
 
@@ -99,7 +99,7 @@ function ProductListScreen() {
                                             </Button>
                                         </LinkContainer>
 
-                                        <Button variant='danger' className='btn-sm' onClick={deleteHandler}>
+                                        <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </td>
