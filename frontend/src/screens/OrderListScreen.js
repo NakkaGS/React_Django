@@ -93,10 +93,6 @@ function OrderListScreen() {
                                             <i className="fas fa-edit"></i>
                                             </Button>
                                         </LinkContainer>
-
-                                        <Button variant='danger' className='btn-sm'>
-                                            <i className="fas fa-trash"></i>
-                                        </Button>
                                     </td>
                                 </tr>
                             ))}
