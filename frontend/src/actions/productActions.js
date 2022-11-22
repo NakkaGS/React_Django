@@ -145,5 +145,44 @@ export const createProduct = () => async(dispatch, getState) => {
                 : error.message,
         })
     }
+}
 
+export const updateProduct = (product) => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: PRODUCT_UPDATE_REQUEST,
+        })
+
+        const {
+            userLogin: { userInfo }
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                accept: 'application/json',
+                Authorization: `Bearer ${userInfo?.token}`
+            }
+        }
+
+        //in the backend, there is a url (API) that it gets the data from the user
+        const { data } = await axios.put(
+            `/api/products/update/${product._id}`,
+            product, //post needs to send something
+            config
+        )
+
+        dispatch({
+            type: PRODUCT_UPDATE_SUCCESS,
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
 }
