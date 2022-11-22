@@ -23,7 +23,8 @@ import {    orderCreateReducer,
             orderDetailsReducer,
             orderPayReducer, 
             orderListMyReducer,
-            orderListReducer } from './reducers/orderReducers'
+            orderListReducer,
+            orderDeliverReducer } from './reducers/orderReducers'
 
 
 //every time that one of the items on the left is call (in the screen, component), it calls the reducer 
@@ -47,7 +48,8 @@ const reducer = combineReducers({
     orderPay: orderPayReducer,
     orderListMy: orderListMyReducer, //orders from the logged user
     orderList: orderListReducer, //orders from all users (just admin)
-
+    orderDeliver: orderDeliverReducer,
+    
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
 
