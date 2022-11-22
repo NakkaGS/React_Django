@@ -7,6 +7,9 @@ from base.views import product_views as views
 #every time that one path is requested it is requested a function
 #it doesn't need to have the complete name because in urls.py it is the full address
 urlpatterns = [
+
+    path('upload/', views.uploadImage, name="image-upload"),
+
     path('', views.getProducts, name="products"),
 
     path('create/', views.createProduct, name="product-create"),

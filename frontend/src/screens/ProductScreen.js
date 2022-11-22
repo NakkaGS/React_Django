@@ -42,8 +42,6 @@ function ProductScreen({ match }) {
   let { id } = useParams(match); //get the Product ID
   //const product = products.find((p) => p._id === id); //find the related product using the id
 
-  console.log(id)
-
   useEffect( () => {
     dispatch(listProductDetails(id))
 
