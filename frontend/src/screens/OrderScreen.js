@@ -10,10 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Actions
-import { getOrderDetails, payOrder } from '../actions/orderActions'
+import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
 
 //Bootstrap Components
-import { Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 
 //Components
 import Message from "../components/Message";
@@ -23,7 +23,7 @@ import Loader from "../components/Message";
 import { PayPalButton } from 'react-paypal-button-v2'
 
 //Constant
-import { ORDER_PAY_RESET } from '../constants/orderConstants'
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
 function OrderScreen({ match }) {
     const dispatch = useDispatch()
@@ -37,6 +37,14 @@ function OrderScreen({ match }) {
     //////////
     const orderPay = useSelector(state => state.orderPay)
     const { loading: loadingPay, success:successPay } = orderPay
+
+    //////////
+    const orderDeliver = useSelector(state => state.orderDeliver)
+    const { loading: loadingDeliver, success:successDeliver } = orderDeliver
+
+    //////////
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
     //////////
     if(!loading && !error){
@@ -61,10 +69,11 @@ function OrderScreen({ match }) {
     }
     ////////
     useEffect(() => {
-        if (!order || successPay || order?._id !== Number(id)) {
+        if (!order || successPay || order?._id !== Number(id) || successDeliver) {
             dispatch(getOrderDetails(id))
             //console.log('Getting Data')
             dispatch({type: ORDER_PAY_RESET})
+            dispatch({type: ORDER_DELIVER_RESET})
         }else if(!order.isPaid){
             if(!window.paypal){
                 addPayPalScript()
@@ -72,11 +81,16 @@ function OrderScreen({ match }) {
                 setSdkReady(true)
             }
         }
-    }, [order, id, dispatch, order?._id, successPay]) //effects is used when one of the parameters is updated
+    }, [order, id, dispatch, order?._id, successPay, successDeliver]) //effects is used when one of the parameters is updated
     
     ////////
     const successPaymentHandler = (paymentResult) => {
         dispatch(payOrder(id, paymentResult))
+    }
+
+    ////////
+    const deliverHandler = () => {
+        dispatch(deliverOrder(order))
     }
 
 
@@ -211,6 +225,18 @@ function OrderScreen({ match }) {
                         )}
 
                     </ListGroup>
+                    
+                    {loadingDeliver && <Loader />}                
+                    {userInfo && userInfo?.isAdmin && order?.isPaid && !order?.isDelivered && (
+                        <ListGroup.Item>
+                            <Button
+                                type='button'
+                                className='btn btn-block'
+                                onClick={deliverHandler}>
+                                Mark As Deliver
+                            </Button>
+                        </ListGroup.Item>
+                    )}
                 </Card>                      
             </Col>
         </Row>
