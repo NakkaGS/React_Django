@@ -50,7 +50,7 @@ def deleteProduct(request, pk):
 #################
 @api_view(['POST'])
 def createProduct(request):
-    user = request.user
+    user = request.user #that is what the user writes
 
     product = Product.objects.create(
         user=user,
@@ -68,8 +68,8 @@ def createProduct(request):
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateProduct(request, pk):
-    data = request.data
-    product = Product.objects.get(_id=pk)
+    data = request.data #that is what the user writes
+    product = Product.objects.get(_id=pk) #that is the data from the database
 
     product.name = data['name']
     product.price = data['price']

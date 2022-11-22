@@ -12,6 +12,16 @@ import {
     PRODUCT_DELETE_REQUEST,
     PRODUCT_DELETE_SUCCESS,
     PRODUCT_DELETE_FAIL,
+
+    PRODUCT_UPDATE_REQUEST,
+    PRODUCT_UPDATE_SUCCESS,
+    PRODUCT_UPDATE_FAIL,
+    PRODUCT_UPDATE_RESET,
+
+    PRODUCT_CREATE_REQUEST,
+    PRODUCT_CREATE_SUCCESS,
+    PRODUCT_CREATE_FAIL,
+    PRODUCT_CREATE_RESET,
 } from '../constants/productConstants' //it is like enum in C
 
 //it works like a state machine
@@ -95,4 +105,45 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
                 : error.message,
         })
     }
+}
+
+export const createProduct = () => async(dispatch, getState) => {
+    try {
+        dispatch({
+            type: PRODUCT_CREATE_REQUEST,
+        })
+
+        const {
+            userLogin: { userInfo }
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                accept: 'application/json',
+                Authorization: `Bearer ${userInfo?.token}`
+            }
+        }
+
+        //in the backend, there is a url (API) that it gets the data from the user
+        const { data } = await axios.post(
+            `/api/products/create/`,
+            {}, //post needs to send something
+            config
+        )
+
+        dispatch({
+            type: PRODUCT_CREATE_SUCCESS,
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+
 }

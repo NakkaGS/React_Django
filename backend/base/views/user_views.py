@@ -50,7 +50,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 @api_view(['POST'])
 def registerUser(request):
-    data = request.data
+    data = request.data #that is what the user writes
     try:
         user = User.objects.create(
             first_name=data['name'],
@@ -80,10 +80,10 @@ def getUserProfile(request):
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated]) #It blocks the request to get data for just those who is authenticated
 def updateUserProfile(request):
-    user = request.user
+    user = request.user #that is what the user writes
     serializer = UserSerializerWithToken(user, many=False) #show just one Item
 
-    data = request.data
+    data = request.data #that is the data from the database
     user.first_name = data['name']
     user.username = data['email']
     user.email = data['email']
