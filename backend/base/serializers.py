@@ -24,6 +24,7 @@ class ProductSerializer(serializers.ModelSerializer): #take all the model (Table
         fields = '__all__'
             
 class UserSerializer(serializers.ModelSerializer):
+    #these functions are to create new fields
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
@@ -46,6 +47,7 @@ class UserSerializer(serializers.ModelSerializer):
         return name
 
 class UserSerializerWithToken(UserSerializer):
+    #these functions are to create new fields
     token = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -69,6 +71,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    #these functions are to create new fields
     orderItems = serializers.SerializerMethodField(read_only=True)
     shippingAddress = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
@@ -84,8 +87,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_shippingAddress(self, obj):
         try:
-            address = ShippingAddressSerializer(
-                obj.shippingaddress, many=False).data
+            address = ShippingAddressSerializer(obj.shippingaddress, many=False).data
         except:
             address = False
         return address
