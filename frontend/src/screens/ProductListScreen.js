@@ -64,12 +64,12 @@ function ProductListScreen() {
         }
 
         if(successCreate){
-            history(`/admin/product/${createdProduct._id}`)
+            history(`/admin/product/${createdProduct._id}/edit`)
         } else {
             dispatch(listProducts())
         }
         
-    }, [dispatch, history, userInfo, successDelete, successCreate]);
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct?._id]);
 
     return (
     <div>
