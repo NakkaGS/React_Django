@@ -21,6 +21,9 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 
+//Constants
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
+
 function ProductEditScreen({ match }) {
 
     let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
@@ -44,27 +47,46 @@ function ProductEditScreen({ match }) {
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product } = productDetails
 
+    const productUpdate = useSelector(state => state.productUpdate)
+    const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate
+
     //it is to full fill the field as soon as we load the page
     useEffect(() => {
         
-        if(!product?.name || product?._id !== Number(id)){
-            dispatch(listProductDetails(id))
+        if (successUpdate) {
+            dispatch({ type: PRODUCT_UPDATE_RESET })
+            history('/admin/productlist')
         } else {
-            setName(product?.name)
-            setPrice(product?.price)
-            setImage(product?.image)
-            setBrand(product?.brand)
-            setCategory(product?.category)
-            setCountInStock(product?.countInStock)
-            setDescription(product?.description)
+            if(!product?.name || product?._id !== Number(id)){
+                dispatch(listProductDetails(id))
+            } else {
+                setName(product?.name)
+                setPrice(product?.price)
+                setImage(product?.image)
+                setBrand(product?.brand)
+                setCategory(product?.category)
+                setCountInStock(product?.countInStock)
+                setDescription(product?.description)
+            }
         }
 
-    }, [dispatch, product?._id]);
+
+    }, [dispatch, product?._id, successUpdate]);
     
     //console.log(isAdminBool)
 
     const submitHandler = (e) => {
         e.preventDefault()
+        dispatch(updateProduct({
+            _id: id,
+            name,
+            price,
+            image,
+            brand,
+            category,
+            countInStock,
+            description
+        }))
     }
 
     return (

@@ -15,5 +15,5 @@ urlpatterns = [
 
     path('delete/<str:pk>/', views.deleteProduct, name="product-delete"),
 
-    path('update/<str:pk>/', views.deleteProduct, name="product-update"),
+    path('update/<str:pk>/', views.updateProduct, name="product-update"),
 ]

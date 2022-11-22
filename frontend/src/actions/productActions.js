@@ -158,16 +158,15 @@ export const updateProduct = (product) => async(dispatch, getState) => {
         } = getState()
 
         const config = {
-            headers: {
-                'Content-type': 'application/json',
-                accept: 'application/json',
-                Authorization: `Bearer ${userInfo?.token}`
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${userInfo?.token}`,
             }
         }
 
         //in the backend, there is a url (API) that it gets the data from the user
         const { data } = await axios.put(
-            `/api/products/update/${product._id}`,
+            `/api/products/update/${product._id}/`,
             product, //post needs to send something
             config
         )
