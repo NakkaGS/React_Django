@@ -14,11 +14,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { listUsers, deleteUser } from "../actions/userActions";
 
 //Bootstrap Components
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Col, Row } from "react-bootstrap";
 
 //Components
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import MessageTimer from "../components/MessageTimer";
 
 function UserListScreen() {
 
@@ -53,7 +54,14 @@ function UserListScreen() {
 
     return (
     <div>
-        <h1>Users</h1>
+        <Row className='align-items-center'>
+            <Col>
+                <h1>Users</h1>
+            </Col>
+            <Col>
+                {successDelete && <MessageTimer variant='success'>User Deleted</MessageTimer>}
+            </Col> 
+        </Row>
         {loading
             ? (<Loader />)
             : error 

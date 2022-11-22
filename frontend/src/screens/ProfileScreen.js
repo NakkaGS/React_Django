@@ -25,55 +25,55 @@ import Message from "../components/Message";
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 function ProfileScreen() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [message, setMessage] = useState('')
 
   let history = useNavigate(); //for V6 it is useNavigate, NOT useHistory
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   /////////
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { error, loading, user } = userDetails;
+  const userDetails = useSelector((state) => state.userDetails)
+  const { error, loading, user } = userDetails
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const { success } = userUpdateProfile
 
   const orderListMy = useSelector((state) => state.orderListMy)
-  const { loading:loadingOrders, error:errorOrders, orders } = orderListMy
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+
+  if (!userInfo) {
+    history('/login')
+  }
 
   /////////
-
   useEffect(() => {
     if (!userInfo) {
-      history('/login');
+      history('/login')
     } else {
-      if(!user || !user.name || userInfo._id !== user._id)
-      { //that to get the data
-        dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile
-        dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
-        dispatch(listMyOrders())
-        //console.log("Getting Data")
-      }
-      else
-      { //after get the data it full fill the data with setName and setEmail
-        setName(user.name)
-        setEmail(user.email)
-      }
+        if(!user || !user.name || userInfo?._id !== user?._id || success){ //that to get the data
+          dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile
+          dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
+          dispatch(listMyOrders())
+          //console.log("Getting Data")
+        } else { //after get the data it full fill the data with setName and setEmail
+          setName(user.name)
+          setEmail(user.email)
+        }
     }
   }, [history, dispatch, user, userInfo, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Password do not match");
+      setMessage("Password do not match")
     } else {
       //console.log('Updating')
       //action updateUserProfile = (user)
@@ -150,6 +150,7 @@ function ProfileScreen() {
 
         ) : errorOrders ? (
           <Message variant='danger'>{errorOrders}</Message>
+
         ) : (
           <Table striped responsive className='table-sm'>
             <thead>
@@ -162,21 +163,30 @@ function ProfileScreen() {
               </tr>
             </thead>
             <tbody>
-            {orders.map(order => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>${order.totalPrice}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
-                )}</td>
-                <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                        <Button className='btn-sm'>Details</Button>
-                    </LinkContainer>
-                </td>
-              </tr>
-            ))}
+            {Object.keys(orderListMy.orders).length !== 0 ? 
+              orders.map(order => (
+                <tr key={order?._id}>
+                  <td>{order?._id}</td> 
+                  <td>{order?.createdAt.substring(0, 10)}</td>
+                  <td>${order?.totalPrice}</td>
+                  <td>{order?.isPaid ? order?.paidAt.substring(0, 10) : (
+                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                  )}</td>
+                  <td>
+                      <LinkContainer to={`/order/${order?._id}`}>
+                          <Button className='btn-sm'>Details</Button>
+                      </LinkContainer>
+                  </td>
+                </tr>
+              ))
+            : 
+            <tr>
+              <td>
+                <Message>You don't have any order</Message>
+              </td>
+              
+            </tr>
+            }
             </tbody>
           </Table>
         )

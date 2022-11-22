@@ -70,7 +70,6 @@ function ProductListScreen() {
                         <i className='fas fa-plus'></i> Create Product
                 </Button>
             </Col>
-            
         </Row>
         
         {loading
