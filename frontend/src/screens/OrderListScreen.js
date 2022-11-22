@@ -54,12 +54,11 @@ function OrderListScreen() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>TOTAL PRICE</th>
+                                <th>USER</th>
+                                <th>DATE</th>
+                                <th>Total</th>
                                 <th>PAID</th>
-                                <th>PAID AT</th>
                                 <th>DELIVERED</th>
-                                <th>DELIVERED AT</th>
                                 <th></th>
                             </tr>
 
@@ -71,26 +70,25 @@ function OrderListScreen() {
                                     <td>{order?._id}</td>
                                     <td>{order?.user.name}</td>
                                     <td>{order?.totalPrice}</td>
-                                    <td>{order?.isPaid ? (
-                                        <i className="fas fa-check" style={{color: 'green'}}></i>
-                                        ) : (
-                                        <i className="fas fa-xmark" style={{color: 'red'}}></i>
-                                        )}</td>
+                                    
+                                    <td>{order.isPaid ? (
+                                        order.paidAt.substring(0, 10)
+                                    ) : (
+                                            <i className='fas fa-check' style={{ color: 'red' }}></i>
+                                        )}
+                                    </td>
 
-                                    <td>{order?.paidAt}</td>
-                                    
-                                    
-                                    <td>{order?.isDelivered ? (
-                                        <i className="fas fa-check" style={{color: 'green'}}></i>
-                                        ) : (
-                                        <i className="fas fa-xmark" style={{color: 'red'}}></i>
-                                        )}</td>
-                                    <td>{order?.deliveredAt}</td>
+                                    <td>{order.isDelivered ? (
+                                        order.deliveredAt.substring(0, 10)
+                                    ) : (
+                                        <i className='fas fa-check' style={{ color: 'red' }}></i>
+                                        )}
+                                    </td>
 
                                     <td>
-                                        <LinkContainer to={`/admin/order/${order._id}/edit`}>
+                                        <LinkContainer to={`/order/${order._id}/`}>
                                             <Button variant='light' className='btn-sn'>
-                                            <i className="fas fa-edit"></i>
+                                            Details
                                             </Button>
                                         </LinkContainer>
                                     </td>

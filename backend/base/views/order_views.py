@@ -116,9 +116,24 @@ def updateOrderToPaid(request, pk):
     
     return Response('Order was paid')
 
+#################    
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getOrders(request):
     orders = Order.objects.all() #show all the products
     serializer = OrderSerializer(orders, many=True) #show many 'products'
     return Response(serializer.data)
+
+#################
+
+@api_view(['PUT']) #PUT just update a data in SQL and POST create a data
+@permission_classes([IsAdminUser])
+def updateOrderToDelivered(request, pk):
+    order = Order.objects.get(_id=pk)
+
+    order.isDelivered = True
+    order.deliveredAt = datetime.now()
+    order.save()
+    
+    return Response('Delivered was paid')
