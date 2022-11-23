@@ -10,9 +10,10 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response 
+from rest_framework import status
 
 #from .products import products #--imports the data from product.py
-from base.models import Product #call the data from the Database (Models = Table)
+from base.models import Product, Review #call the data from the Database (Models = Table)
 from base.serializers import ProductSerializer
 
 
@@ -95,4 +96,44 @@ def uploadImage(request):
     product.save()
     return Response('Image was uploaded')
 
-        
+#################
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createProductReview(request, pk):
+
+    user = request.user #user data
+    product = Product.objects.get(_id=pk) #product data
+    data = request.data #data to go to review (customer input)
+
+    #1 - Review allready exists (customer already did a review for the product)
+    alreadyExists = product.review_set.filter(user=user).exists()
+
+    if alreadyExists:
+        content = {'details': 'Product already reviewed'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    #2 - No Rating or 0 (customer must make a rating)
+    elif data['rating'] == 0:
+        content = {'details': 'Please select a rating'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    #3 - Create review
+    else:
+        review = Review.objects.create(
+            user=user,
+            product=product,
+            name=user.first_name,
+            rating=data['rating'],
+            comment=data['comment'],
+        )
+        reviews = product.review_set.all()
+        product.numReviews = len(reviews)
+
+        total = 0
+        for i in reviews:
+            total += i.rating
+
+        product.rating = total / len(reviews)       
+        product.save()
+
+        return Response('Review Added')

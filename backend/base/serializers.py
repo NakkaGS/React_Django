@@ -7,7 +7,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User 
 
 #call the data from the Database (Models = Table)
-from .models import Product, ShippingAddress, OrderItem, Order
+from .models import Product, Review, ShippingAddress, OrderItem, Order
 
 ##############################
 #It is used for authentication
@@ -18,10 +18,23 @@ from .models import Product, ShippingAddress, OrderItem, Order
 from rest_framework_simplejwt.tokens import RefreshToken
 ##############################
 
+class ReviewSerializer(serializers.ModelSerializer): #take all the model (Table) and converts to js
+    class Meta:
+        model = Review
+        fields = '__all__'
+
+#ReviewSerializer must be before ProductSerializer
 class ProductSerializer(serializers.ModelSerializer): #take all the model (Table) and converts to js
+    reviews = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Product
         fields = '__all__'
+    
+    def get_reviews(self, obj): #take the review and add in the Product model
+        reviews = obj.review_set.all()
+        serializer = ReviewSerializer(reviews, many=True)
+        return serializer.data
             
 class UserSerializer(serializers.ModelSerializer):
     #these functions are to create new fields
