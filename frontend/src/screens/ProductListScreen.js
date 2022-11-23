@@ -22,7 +22,7 @@ import Message from "../components/Message";
 import MessageTimer from "../components/MessageTimer";
 
 //Constants
-import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstants'
 
 function ProductListScreen() {
 
@@ -35,7 +35,7 @@ function ProductListScreen() {
     //separate the data from the productList
 
     const productDelete = useSelector(state => state.productDelete)
-    const {error: errorDelete, success: successDelete} = productDelete 
+    const {error: errorDelete, success: successDelete, loading: loadingDelete} = productDelete 
     //separate the data from the productList
 
     const productCreate = useSelector(state => state.productCreate)
@@ -46,21 +46,24 @@ function ProductListScreen() {
     const { userInfo } = userLogin
 
     const deleteHandler = (id) => {
-        if (window.confirm('Are you sure you want to delete this product?')){
-            //console.log('DELETE: ', id)
-            dispatch(deleteProduct(id))
-        }
-     }
+    if (window.confirm('Are you sure you want to delete this product?')){
+        //console.log('DELETE: ', id)
+        dispatch(deleteProduct(id))
+    }
+    }
 
-     const createProductHandler = () => {
+    const createProductHandler = () => {
         dispatch(createProduct())
-     }
+    }
 
     useEffect(() => {
         //console.log('Getting Data')
-        dispatch({type: PRODUCT_CREATE_RESET})
+
         if(!userInfo.isAdmin){
             history('/login')//it is using useNavigate, it doesn't need push
+        } else {
+            dispatch({type: PRODUCT_CREATE_RESET})
+            dispatch({type: PRODUCT_DELETE_RESET})
         }
 
         if(successCreate){
@@ -78,14 +81,14 @@ function ProductListScreen() {
                 <h1>Products</h1>
             </Col>
             <Col>
-                {successDelete && <MessageTimer variant='success'>Product Deleted</MessageTimer>}
+                {loadingDelete && <MessageTimer variant='success'>Product Deleted</MessageTimer>}
                 {errorDelete && <Message variant='danger'>{error}</Message>}
 
                 {loadingCreate && <Loader />}
                 {errorDelete && <Message variant='danger'>{error}</Message>}
             </Col> 
             <Col className='text-right'>
-                <Button className='my-3' onClick={createProductHandler}>
+                <Button className='my-3 float-end' onClick={createProductHandler}>
                         <i className='fas fa-plus'></i> Create Product
                 </Button>
             </Col>

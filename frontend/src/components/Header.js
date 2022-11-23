@@ -61,6 +61,9 @@ function Header() {
               </LinkContainer>
               )}
 
+            </Nav>
+
+            <Nav className="float-end">
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenue'>
                   <LinkContainer to='/admin/userlist'>
@@ -77,11 +80,12 @@ function Header() {
 
                 </NavDropdown>
               )}
-
-
             </Nav>
+            
           </Navbar.Collapse>
         </Container>
+
+
       </Navbar>
     </header>
   );

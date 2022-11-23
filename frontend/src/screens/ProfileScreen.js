@@ -44,7 +44,7 @@ function ProfileScreen() {
   const { userInfo } = userLogin
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
-  const { success } = userUpdateProfile
+  const { success: successUpdate } = userUpdateProfile
 
   const orderListMy = useSelector((state) => state.orderListMy)
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
@@ -58,7 +58,8 @@ function ProfileScreen() {
     if (!userInfo) {
       history('/login')
     } else {
-        if(!user || !user.name || userInfo?._id !== user?._id || success){ //that to get the data
+      console.log("Getting Data")
+        if(!user || !user.name || userInfo?._id !== user?._id || successUpdate){ //that to get the data
           dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile
           dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
           dispatch(listMyOrders())
@@ -68,7 +69,7 @@ function ProfileScreen() {
           setEmail(user.email)
         }
     }
-  }, [history, dispatch, user, userInfo, success]);
+  }, [history, dispatch, user, userInfo, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -86,6 +87,7 @@ function ProfileScreen() {
       setMessage("");
     }
   };
+
   return (
     <Row>
       <Col md={4}>
@@ -162,7 +164,9 @@ function ProfileScreen() {
                 <th>Delivered</th>
               </tr>
             </thead>
+            
             <tbody>
+            {console.log(Object.keys(orderListMy.orders).length)}
             {Object.keys(orderListMy.orders).length !== 0 ? 
               orders.map(order => (
                 <tr key={order?._id}>
@@ -180,12 +184,11 @@ function ProfileScreen() {
                 </tr>
               ))
             : 
-            <tr>
-              <td>
-                <Message>You don't have any order</Message>
-              </td>
-              
-            </tr>
+              <tr>
+                <td>
+                  <Message>You don't have any order</Message>
+                </td>                
+              </tr>
             }
             </tbody>
           </Table>

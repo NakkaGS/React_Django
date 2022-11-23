@@ -21,6 +21,9 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import MessageTimer from "../components/MessageTimer";
 
+//Constants
+import { USER_DELETE_RESET } from '../constants/userConstants'
+
 function UserListScreen() {
 
     const dispatch = useDispatch()
@@ -34,7 +37,10 @@ function UserListScreen() {
     const { userInfo } = userLogin
 
     const userDelete = useSelector(state => state.userDelete)
-    const { success:successDelete } = userDelete
+    const { success: successDelete } = userDelete
+
+    const userUpdate = useSelector(state => state.userUpdate)
+    const { success: successUpdate } = userUpdate
 
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure you want to delete this user?')){
@@ -45,6 +51,7 @@ function UserListScreen() {
 
     useEffect(() => {
         if(userInfo && userInfo.isAdmin){
+            dispatch({type: USER_DELETE_RESET})
             dispatch(listUsers())
         }else{
             history('/login')//it is using useNavigate, it doesn't need push
@@ -58,8 +65,10 @@ function UserListScreen() {
             <Col>
                 <h1>Users</h1>
             </Col>
+            
             <Col>
                 {successDelete && <MessageTimer variant='success'>User Deleted</MessageTimer>}
+                {successUpdate && <MessageTimer variant='success'>User Updated</MessageTimer>}
             </Col> 
         </Row>
         {loading

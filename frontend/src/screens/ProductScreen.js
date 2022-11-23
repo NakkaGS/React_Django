@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 //Router
 import { Link, useParams, useNavigate } from "react-router-dom"; //Library React Router Dom
+import { LinkContainer } from "react-router-bootstrap";
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,6 +37,9 @@ function ProductScreen({ match }) {
   const productDetails = useSelector(state => state.productDetails)
   const { loading, error, product } = productDetails
   //const [product, setProduct] = useState([]) //not been used after the Redux application
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
   //using the useParams (using the new version)
   //useParams returns the key of the  current <Route> (App.js - <Route path='product/:id'...> in this case id)
@@ -76,6 +80,15 @@ function ProductScreen({ match }) {
     
             <Col md={3}>
               <ListGroup variant="flush">
+
+                {userInfo && userInfo?.isAdmin && (
+                  <LinkContainer to={`/admin/product/${product?._id}/edit`}>
+                    <Button variant='dark' className='btn-sm'>
+                        <i className='fas fa-edit'></i>
+                    </Button>
+                  </LinkContainer>
+                )}
+
                 <ListGroup.Item>
                   <h3>{product?.name}</h3>
                 </ListGroup.Item>
