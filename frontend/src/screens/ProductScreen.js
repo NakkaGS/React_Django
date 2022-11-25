@@ -67,12 +67,12 @@ function ProductScreen({ match }) {
 
     fetchProduct() */
 
-  }, [dispatch, id, match, history])
+  }, [dispatch, id, match, history, successProductReview])
 
   const submitHandler = (e) => {
       e.preventDefault()
       dispatch(createProductReview(
-          match.params.id, {
+          id, {
           rating,
           comment
       }
@@ -199,19 +199,21 @@ function ProductScreen({ match }) {
                 <Col md={6}>
                   <h4>Reviews</h4>
 
-                  {typeof(product?.reviews.length) === 'undefined' ? 
+                  {typeof(product?.reviews) === 'undefined' ? 
                     dispatch(listProductDetails(id))
                     : Number(product?.reviews.length) === 0 && <Message variant='info'>No Reviews</Message>}
                   <ListGroup variant='flush'>
                     {typeof(product?.reviews.length) !== 'undefined' && product && product.reviews.map((review) => (
                       <ListGroup.Item key={review._id}>
-                        <strong>{review.name}</strong>
-                        <Rating value={review.ration} color='$f8e825'/>
+                        <strong>{review?.name}</strong>
+                        <Rating value={review?.rating} color='$f8e825'/> - {review?.createdAt.substring(0, 10)}
+                        
+                        <p>{review?.comment}</p>
                       </ListGroup.Item>
                       
                     ))}
                     
-                    <ListGroup.Item>
+                    <ListGroup.Item className="my-3">
                         <h4>Write a review</h4>
 
                         {loadingProductReview && <Loader />}

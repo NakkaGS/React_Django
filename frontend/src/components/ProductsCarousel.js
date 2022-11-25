@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 
 //Boostrap Components
-import { Carousel, Image, Row, Col }from 'react-bootstrap'
+import { Carousel, Image, Row, Col } from 'react-bootstrap'
 
 //Components
 import Loader from './Loader' //to have the Spinner in the page

@@ -200,10 +200,9 @@ export const createProductReview = (id, review) => async(dispatch, getState) => 
         } = getState()
 
         const config = {
-            headers: { 
-                'Content-type': 'application/json',
-                accept: 'application/json',
-                Authorization: `Bearer ${userInfo?.token}`
+            headers: { //It just worked like this for PUT. Axious is in x-www-form-urlencoded
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${userInfo?.token}`,
             }
         }
 

@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 //Components
 import ItemsInCart from '../components/ItemsInCart'
+import SearchBox from '../components/SearchBox'
 
 function Header() {
 
@@ -37,6 +38,8 @@ function Header() {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+
+          <SearchBox/>
             <Nav className="me-auto">
 
               <LinkContainer to="/cart">
