@@ -39,8 +39,9 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
 
-          <SearchBox/>
+          
             <Nav className="me-auto">
+            <SearchBox/>
 
               <LinkContainer to="/cart">
                 <Nav.Link>
@@ -56,7 +57,7 @@ function Header() {
                   <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                 </NavDropdown>
                   
-              ): (
+              ) : (
                 <LinkContainer to="/login">
                 <Nav.Link>
                   <i className="fas fa-user"></i> Login

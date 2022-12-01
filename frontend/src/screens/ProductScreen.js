@@ -82,6 +82,7 @@ function ProductScreen({ match }) {
   const addtoCardHandler = ( ) => {
     history(`/cart/${id}?qty=${qty}`) //it is using useNavigate, it doesn't need push
   }
+
   return(
     <div>
       <Link to="/" className="btn btn-light- my-3">Go Back</Link>
@@ -90,7 +91,7 @@ function ProductScreen({ match }) {
         <Loader/>
         : error
           ? <Message variant='danger'>{error}</Message>
-          :(
+          : (
             <div>
               <Row>
                 <Col md={6}>
@@ -198,14 +199,20 @@ function ProductScreen({ match }) {
               <Row className="my-3">
                 <Col md={6}>
                   <h4>Reviews</h4>
+                                    
+                  {loading ? 
+                    <Loader/> 
+                    : typeof(product) === 'undefined' 
+                      ? dispatch(listProductDetails(id))
+                       : typeof(product?.reviews?.length) !== 'undefined' && Number(product?.reviews?.length) === 0 && <Message variant='info'>No Reviews</Message>
+                      }
 
-                  {typeof(product?.reviews) === 'undefined' ? 
-                    dispatch(listProductDetails(id))
-                    : Number(product?.reviews.length) === 0 && <Message variant='info'>No Reviews</Message>}
                   <ListGroup variant='flush'>
-                    {typeof(product?.reviews.length) !== 'undefined' && product && product.reviews.map((review) => (
+                    
+                    {typeof(product?.reviews?.length) !== 'undefined' && product && product.reviews.map((review) => (
                       <ListGroup.Item key={review._id}>
                         <strong>{review?.name}</strong>
+
                         <Rating value={review?.rating} color='$f8e825'/> - {review?.createdAt.substring(0, 10)}
                         
                         <p>{review?.comment}</p>

@@ -6,6 +6,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux' 
 //useSelector - allows us to used certain parts of the state/reducer
 
+//Router
+import { useLocation, redirect } from "react-router-dom"
+
 //Actions
 import { listProducts } from '../actions/productActions'
 
@@ -33,6 +36,10 @@ function HomeScreen() {
   const {error, loading, products} = productList 
   //separate the data from the productList
 
+  let history = useLocation(); //for V6 it is useLocation, NOT useHistory
+
+  let keyword = history.search //for V6 it is search, NOT pathname
+
   useEffect(() => {
 
     dispatch(listProducts())
@@ -46,7 +53,7 @@ function HomeScreen() {
     fetchProducts()
     */
 
-  }, [dispatch]) //it is to create a loading/ error view
+  }, [dispatch, keyword]) //it is to create a loading/ error view
  
   return (
     <div>
