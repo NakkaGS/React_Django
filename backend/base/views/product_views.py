@@ -3,6 +3,9 @@
 from imp import is_builtin
 from django.shortcuts import render
 
+#Pagination
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 #Django Rest Framework - Representational state transfer (REST) 
 #In general, RESTful web APIs are loosely based on HTTP methods such as GET, POST, PUT, PATCH, DELETE, OPTIONS. 
 #HTTP requests are used to access data or resources in the web application via URL-encoded parameters. 
@@ -26,10 +29,33 @@ def getProducts(request):
     if query == None:
         query = ''
 
-    products = Product.objects.filter(name__icontains=query) #if the 'name' constains any value in the query
+    products = Product.objects.filter(name__icontains=query).order_by('_id') #if the 'name' constains any value in the query
+    
+    #Paginator
+    page = request.query_params.get('page') #this is from the Paginator (backend)
+    paginator = Paginator(products, 2)
+
+    try:
+        products = paginator.page(page)
+    
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+    
+    page = int(page)
+
+    print('Page:', page)
+    
     #products = Product.objects.all() #show all the products
     serializer = ProductSerializer(products, many=True) #show many 'products'
-    return Response(serializer.data)
+    return Response({'products':serializer.data, 
+                    'page':page, 
+                    'pages':paginator.num_pages})
 
 #################
 

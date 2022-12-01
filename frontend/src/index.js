@@ -15,6 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   //This method is with Redux
+  
   <Provider store={store}>
      <App /> {/*it calls App.js */}
    </Provider>

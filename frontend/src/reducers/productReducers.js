@@ -46,7 +46,10 @@ export const productListReducer = (state = { products:[]}, action ) => {
             return {loading:true, products: []}
         
         case PRODUCT_LIST_SUCCESS: //if the connection is OK, it gets all the product and reset the loading 
-            return {loading: false, products: action.payload}
+            return {loading: false, 
+                    products: action.payload.products, 
+                    page:action.payload.page, pages: 
+                    action.payload.pages}
 
         case PRODUCT_LIST_FAIL: //is there is a error, it calls this case
             return {loading: false, error: action.payload}
