@@ -56,7 +56,7 @@ function ProductScreen({ match }) {
   let { id } = useParams(match); //get the Product ID
   //const product = products.find((p) => p._id === id); //find the related product using the id
 
-  useEffect( () => {
+  useEffect(() => {
     dispatch(listProductDetails(id))
 
     //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
@@ -200,24 +200,16 @@ function ProductScreen({ match }) {
                 <Col md={6}>
                   <h4>Reviews</h4>
                                     
-                  {loading ? 
-                    <Loader/> 
-                    : typeof(product) === 'undefined' 
-                      ? dispatch(listProductDetails(id))
-                       : typeof(product?.reviews?.length) !== 'undefined' && Number(product?.reviews?.length) === 0 && <Message variant='info'>No Reviews</Message>
-                      }
+                  {product?.reviews?.length === 0 && <Message variant='info'>No Reviews</Message>}
 
                   <ListGroup variant='flush'>
-                    
-                    {typeof(product?.reviews?.length) !== 'undefined' && product && product.reviews.map((review) => (
-                      <ListGroup.Item key={review._id}>
-                        <strong>{review?.name}</strong>
-
-                        <Rating value={review?.rating} color='$f8e825'/> - {review?.createdAt.substring(0, 10)}
-                        
-                        <p>{review?.comment}</p>
-                      </ListGroup.Item>
-                      
+                      {product?.reviews?.map((review) => (
+                          <ListGroup.Item key={review?._id}>
+                              <strong>{review?.name}</strong>
+                              <Rating value={review?.rating} color='#f8e825' />
+                              <p>{review?.createdAt.substring(0, 10)}</p>
+                              <p>{review?.comment}</p>
+                          </ListGroup.Item>
                     ))}
                     
                     <ListGroup.Item className="my-3">

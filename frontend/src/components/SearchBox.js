@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Form, Button } from "react-bootstrap";
 
-import { useLocation, redirect } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 function SearchBox() {
 
@@ -10,13 +10,15 @@ function SearchBox() {
 
     let history = useLocation(); //for V6 it is useNavigate, NOT useHistory
 
+    const navigate = useNavigate();
+
     const submitHandler = (e) => {
-        e.presentDefault()
+        e.preventDefault()
 
         if(keyword){
-            redirect(`/?keyword=${keyword}`)
+            navigate(`/?keyword=${keyword}`)
         } else {
-            redirect(history.location.pathname)
+            navigate(history.search)
         }
     }
 
@@ -24,7 +26,7 @@ function SearchBox() {
         <Form onSubmit={submitHandler} className="container">
             <Form.Control
                 type='text'
-                name='keyword'
+                name='q'
                 onChange={(e) => setKeyword(e.target.value)}
                 className='mr-sm-2 ml-sm-5'
             ></Form.Control>

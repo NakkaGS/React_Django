@@ -58,7 +58,6 @@ function ProfileScreen() {
     if (!userInfo) {
       history('/login')
     } else {
-      console.log("Getting Data")
         if(!user || !user.name || userInfo?._id !== user?._id || successUpdate){ //that to get the data
           dispatch({ type: USER_UPDATE_PROFILE_RESET}) //it helps to not get the same profile as in Edit User Profile
           dispatch(getUserDetails('profile')) //action getUserDetails = (id) //WHYYYY 'profile??????
@@ -166,9 +165,10 @@ function ProfileScreen() {
             </thead>
             
             <tbody>
-            {console.log(Object.keys(orderListMy.orders).length)}
-            {Object.keys(orderListMy.orders).length !== 0 ? 
-              orders.map(order => (
+            
+            {typeof(orderListMy?.orders) !== 'undefined' && Object.keys(orderListMy.orders).length !== 0 ? 
+              
+              orders?.map(order => (
                 <tr key={order?._id}>
                   <td>{order?._id}</td> 
                   <td>{order?.createdAt.substring(0, 10)}</td>

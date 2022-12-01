@@ -20,7 +20,14 @@ from base.serializers import ProductSerializer
 #it is used to show all the product in the HomeScreen
 @api_view(['GET'])
 def getProducts(request):
-    products = Product.objects.all() #show all the products
+    query = request.query_params.get('keyword') #this is from the Search
+
+    #print(query)
+    if query == None:
+        query = ''
+
+    products = Product.objects.filter(name__icontains=query) #if the 'name' constains any value in the query
+    #products = Product.objects.all() #show all the products
     serializer = ProductSerializer(products, many=True) #show many 'products'
     return Response(serializer.data)
 

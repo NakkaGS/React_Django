@@ -42,7 +42,7 @@ function HomeScreen() {
 
   useEffect(() => {
 
-    dispatch(listProducts())
+    dispatch(listProducts(keyword))
 
     //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
   /*     async function fetchProducts() {
