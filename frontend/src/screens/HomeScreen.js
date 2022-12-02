@@ -20,6 +20,7 @@ import Product from '../components/Product'; //import the component Product
 import Loader from '../components/Loader' //to have the Spinner in the page
 import Message from '../components/Message' //to have the Error in the page
 import MessageTimer from '../components/MessageTimer' //to have the Error in the page
+import Paginate from '../components/Paginate' //Pagination
 
 import ProductsCarousel from '../components/ProductsCarousel'
 
@@ -33,7 +34,7 @@ function HomeScreen() {
   const dispatch = useDispatch()
 
   const productList = useSelector(state => state.productList)
-  const {error, loading, products} = productList 
+  const {error, loading, products, pages, page} = productList 
   //separate the data from the productList
 
   let history = useLocation(); //for V6 it is useLocation, NOT useHistory
@@ -66,13 +67,16 @@ function HomeScreen() {
             : error ? <Message variant='danger'>{error}</Message>
               : (!loading && Object.keys(productList.products).length === 0) ? <Message variant='info'>No Products</Message> 
               :
-                <Row>
-                {products?.map(product => ( //it was added ? because it was given fault. It is first asking if the array existed 
-                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                    <Product product={product} />
-                  </Col>
-                ))}
-              </Row>
+              <div>
+                  <Row>
+                  {products?.map(product => ( //it was added ? because it was given fault. It is first asking if the array existed 
+                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                      <Product product={product} />
+                    </Col>
+                  ))}
+                </Row>
+                <Paginate page={page} pages={pages} keyword={keyword} />
+              </div>
           }
 
     </div>
