@@ -20,6 +20,7 @@ import { Table, Button, Badge, Col, Row } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import MessageTimer from "../components/MessageTimer";
+import Paginate from "../components/Paginate";
 
 //Constants
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstants'
@@ -31,7 +32,7 @@ function ProductListScreen() {
     let history = useNavigate() 
 
     const productList = useSelector(state => state.productList)
-    const {error, loading, products} = productList 
+    const {error, loading, products, pages, page} = productList 
     //separate the data from the productList
 
     const productDelete = useSelector(state => state.productDelete)
@@ -56,6 +57,8 @@ function ProductListScreen() {
         dispatch(createProduct())
     }
 
+    let keyword = history.search //for V6 it is search, NOT pathname
+
     useEffect(() => {
         //console.log('Getting Data')
 
@@ -69,10 +72,10 @@ function ProductListScreen() {
         if(successCreate){
             history(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProducts())
+            dispatch(listProducts(keyword))
         }
         
-    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct?._id]);
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct?._id, keyword]);
 
     return (
     <div>
@@ -102,6 +105,7 @@ function ProductListScreen() {
             : error 
                 ? (<Message variant='danger'>{error}</Message>)
                 : (
+                <div>
                     <Table striped bordered hover responsive className="table-sm">
                         <thead>
                             <tr>
@@ -140,6 +144,9 @@ function ProductListScreen() {
                             ))}
                         </tbody>
                     </Table>
+                    <Paginate pages={pages} page={page} isAdmin={true} />
+
+                </div>
                 )
         }
     </div>
