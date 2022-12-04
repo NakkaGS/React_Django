@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 
 //Router
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom"
 import { LinkContainer } from "react-router-bootstrap";
 
 //Redux
@@ -29,7 +29,7 @@ function ProductListScreen() {
 
     const dispatch = useDispatch()
 
-    let history = useNavigate() 
+    let history = useLocation() 
 
     const productList = useSelector(state => state.productList)
     const {error, loading, products, pages, page} = productList 
@@ -47,10 +47,10 @@ function ProductListScreen() {
     const { userInfo } = userLogin
 
     const deleteHandler = (id) => {
-    if (window.confirm('Are you sure you want to delete this product?')){
-        //console.log('DELETE: ', id)
-        dispatch(deleteProduct(id))
-    }
+        if (window.confirm('Are you sure you want to delete this product?')){
+            //console.log('DELETE: ', id)
+            dispatch(deleteProduct(id))
+        }
     }
 
     const createProductHandler = () => {
@@ -144,7 +144,7 @@ function ProductListScreen() {
                             ))}
                         </tbody>
                     </Table>
-                    <Paginate pages={pages} page={page} isAdmin={true} />
+                    <Paginate page={page} pages={pages} isAdmin={true} />
 
                 </div>
                 )

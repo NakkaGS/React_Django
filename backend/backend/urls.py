@@ -22,10 +22,12 @@ from django.urls import path, include #include add a file from a app
 
 from django.conf import settings #Imports the data from the Django settings.py
 from django.conf.urls.static import static #allows us to connect out urls
+from django.views.generic import TemplateView
 
 urlpatterns = [
 
     path('admin/', admin.site.urls), #Open the admin website
+    path('', TemplateView.as_view(template_name='index.html')),
     path('api/products/', include ('base.urls.product_urls')),
     path('api/users/', include ('base.urls.user_urls')),
     path('api/orders/', include('base.urls.order_urls')),

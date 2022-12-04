@@ -20,42 +20,38 @@ from base.models import Product, Review #call the data from the Database (Models
 from base.serializers import ProductSerializer
 
 
-#it is used to show all the product in the HomeScreen
 @api_view(['GET'])
 def getProducts(request):
-    query = request.query_params.get('keyword') #this is from the Search
-
-    #print(query)
+    
+    #Search
+    query = request.query_params.get('keyword')
+    
     if query == None:
         query = ''
 
-    products = Product.objects.filter(name__icontains=query).order_by('_id') #if the 'name' constains any value in the query
-    
-    #Paginator
-    page = request.query_params.get('page') #this is from the Paginator (backend)
-    paginator = Paginator(products, 2)
+    #Filter
+    products = Product.objects.filter(
+        name__icontains=query).order_by('-createdAt')
 
+
+    #Paginator
+    page = request.query_params.get('page')
+    paginator = Paginator(products, 5)
+    
     try:
         products = paginator.page(page)
-    
     except PageNotAnInteger:
         products = paginator.page(1)
-    
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
 
     if page == None:
         page = 1
-    
-    page = int(page)
 
+    page = int(page)
     print('Page:', page)
-    
-    #products = Product.objects.all() #show all the products
-    serializer = ProductSerializer(products, many=True) #show many 'products'
-    return Response({'products':serializer.data, 
-                    'page':page, 
-                    'pages':paginator.num_pages})
+    serializer = ProductSerializer(products, many=True)
+    return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
 
 #################
 

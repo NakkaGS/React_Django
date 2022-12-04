@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Router
-import { useLocation, redirect } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 //Actions
 import { listProducts } from '../actions/productActions'
@@ -42,7 +42,6 @@ function HomeScreen() {
   let keyword = history.search //for V6 it is search, NOT pathname
 
   useEffect(() => {
-
     dispatch(listProducts(keyword))
 
     //It is part is same as in the action (productActions) - This part is used when we don't have Redux (it get the data from the Django)
@@ -53,7 +52,6 @@ function HomeScreen() {
 
     fetchProducts()
     */
-
   }, [dispatch, keyword]) //it is to create a loading/ error view
  
   return (
