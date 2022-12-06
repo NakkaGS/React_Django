@@ -25,6 +25,10 @@ import {
     PRODUCT_CREATE_REVIEW_SUCCESS,
     PRODUCT_CREATE_REVIEW_FAIL,
 
+    PRODUCT_TOP_REQUEST,
+    PRODUCT_TOP_SUCCESS,
+    PRODUCT_TOP_FAIL,
+
 } from '../constants/productConstants' //it is like enum in C
 
 //it works like a state machine
@@ -223,6 +227,27 @@ export const createProductReview = (id, review) => async(dispatch, getState) => 
             type: PRODUCT_CREATE_REVIEW_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+//////////////////////////////////////////////
+export const listTopProducts = () => async (dispatch) => { //it is a action
+    try {
+        dispatch({ type: PRODUCT_TOP_REQUEST })
+            const { data } = await axios.get(`/api/products/top/`)
+
+        dispatch({
+            type: PRODUCT_TOP_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_TOP_FAIL,
+            payload: error.response && error.response.data.detail //if there a detail it show the detail, otherwise it shows the message set in 
+                ? error.response.data.detail 
                 : error.message,
         })
     }

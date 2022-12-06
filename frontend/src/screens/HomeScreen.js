@@ -57,7 +57,7 @@ function HomeScreen() {
   return (
     <div>
 
-      {(!loading && Object.keys(productList.products).length === 0) ? <MessageTimer variant='info'>No Products</MessageTimer> : <ProductsCarousel/>}
+      {(!keyword && !loading && Object.keys(productList.products).length === 0) ? <MessageTimer variant='info'>No Products</MessageTimer> : <ProductsCarousel/>}
       
       <h1>Latest Products</h1>
 

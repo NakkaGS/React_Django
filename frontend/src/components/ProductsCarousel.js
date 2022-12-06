@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 //useSelector - allows us to used certain parts of the state/reducer
 
 //Actions
-import { listProducts } from '../actions/productActions'
+import { listTopProducts } from '../actions/productActions'
 
 //Boostrap Components
 import { Carousel, Image, Row, Col } from 'react-bootstrap'
@@ -21,11 +21,11 @@ function ProductsCarousel() {
 
   const dispatch = useDispatch()
 
-  const productList = useSelector(state => state.productList)
-  const { error, loading, products } = productList
+  const productTopRated = useSelector(state => state.productTopRated)
+  const { error, loading, products } = productTopRated
 
   useEffect(() => {
-      dispatch(listProducts())
+      dispatch(listTopProducts())
   }, [dispatch])
 
   return (
@@ -40,7 +40,7 @@ function ProductsCarousel() {
 
               <Row>
                 <Col md={6} style={{height:"22rem", display: "flex", marginTop: "2.5rem", justifyContent: "center"}}>
-                  <Image src={product.image} alt={product.name} fluid style={{height:"15rem", width:"15rem"}}/>
+                  <Image src={product.image} alt={product.name} fluid style={{height:"15rem", width:"15rem", borderRadius:"50%"}}/>
                 </Col>
 
                 <Col md={4}>
