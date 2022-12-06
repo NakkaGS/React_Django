@@ -23,7 +23,7 @@ function SearchBox() {
     }
 
     return (
-        <Form onSubmit={submitHandler} className="container">
+        <Form onSubmit={submitHandler} className="search-box">
             <Form.Control
                 type='text'
                 name='q'

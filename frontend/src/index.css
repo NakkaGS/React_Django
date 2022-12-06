@@ -42,3 +42,9 @@ h3 {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.search-box{
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+}
