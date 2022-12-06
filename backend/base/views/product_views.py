@@ -77,6 +77,12 @@ def deleteProduct(request, pk):
     product.delete()
     return Response('Product was deleted')
 
+@api_view(['GET'])
+def getTopProducts(request):
+    products = Product.objects.filter(rating__gte = 4).order_by('-rating')[0:5] #it gets the 5 product with equal or higher rating then 4
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
 #################
 @api_view(['POST'])
 def createProduct(request):
