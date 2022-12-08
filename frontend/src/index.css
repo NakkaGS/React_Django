@@ -20,11 +20,6 @@ h3 {
   margin: 0.1rem;
 }
 
-.nkt {
-  width: 15rem;
-  height: 15rem;
-}
-
 .pagination {
   display: inline-block;
 }
@@ -47,4 +42,17 @@ h3 {
   max-width: 300px;
   display: flex;
   align-items: center;
+}
+
+.carousel-image{
+  max-height: 15rem;
+  max-width: 15rem;
+  border-radius: 50%;
+  margin: auto
+}
+
+.carousel-col{
+  max-height: 22rem;
+  display: flex;
+  justify-content: center;
 }
