@@ -39,13 +39,13 @@ function ProductsCarousel() {
             <Link to={`/product/${product._id}`} style={{ textDecoration: 'none' }}>
 
               <Row>
-                <Col md={6} className="carousel-col">
+                <Col md={6} className="carousel-col-image">
                   <Image src={ product.image } alt={ product.name } fluid className="carousel-image"/>
                 </Col>
 
-                <Col md={4}>
+                <Col md={4} className="carousel-col-text">
                     <h2>{ product.name }</h2>
-                    <p>{ product?.description }</p>
+                    <p>{ product?.description.substring(0,100) }...</p>
                     <h3>${ product.price }</h3>
                 </Col>
                 

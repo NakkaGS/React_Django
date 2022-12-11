@@ -51,8 +51,13 @@ h3 {
   margin: auto
 }
 
-.carousel-col{
-  max-height: 22rem;
+.carousel-col-image{
+  max-height: 20rem;
   display: flex;
   justify-content: center;
+}
+
+.carousel-col-text{
+  margin-bottom: 2.5rem ;
+  height: 22rem;
 }
