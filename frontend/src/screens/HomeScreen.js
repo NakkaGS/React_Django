@@ -24,6 +24,9 @@ import Paginate from '../components/Paginate' //Pagination
 
 import ProductsCarousel from '../components/ProductsCarousel'
 
+import ProductNKT from '../components/ProductNKT'
+
+
 //Axios
 //import axios from 'axios' //not been used after the Redux application
 //import products from "../products"; //reads the file products.js
@@ -69,13 +72,13 @@ function HomeScreen() {
                   <Row>
                   {products?.map(product => ( //it was added ? because it was given fault. It is first asking if the array existed 
                     <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                      <Product product={product} />
+                      <ProductNKT product={product} />
                     </Col>
                   ))}
                 </Row>
                 <Paginate page={page} pages={pages} keyword={keyword} />
               </div>
-          }
+      }  
 
     </div>
   );

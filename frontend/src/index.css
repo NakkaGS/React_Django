@@ -20,6 +20,7 @@ h3 {
   margin: 0.1rem;
 }
 
+/* Pagination */
 .pagination {
   display: inline-block;
 }
@@ -29,6 +30,7 @@ h3 {
   float: left;
   padding: 8px 16px;
   text-decoration: none;
+  margin: 0px;
 }
 
 .pagination p.active {
@@ -38,26 +40,104 @@ h3 {
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
+/* Search Box */
+
 .search-box{
   max-width: 300px;
   display: flex;
   align-items: center;
 }
 
-.carousel-image{
+/* Carousel */
+.carousel-col-image img{
   max-height: 15rem;
-  max-width: 15rem;
-  border-radius: 50%;
-  margin: auto
-}
-
-.carousel-col-image{
-  max-height: 20rem;
+  border-radius: 30%;
   display: flex;
   justify-content: center;
+  margin: 5% 30%;
+  
 }
 
 .carousel-col-text{
   margin-bottom: 2.5rem ;
   height: 22rem;
+}
+
+.carousel-col-text h2{
+  font-weight: 50;
+}
+
+/*NKT Product Card */
+
+#nktproduct {
+  text-align: center;
+}
+
+#nktproduct .nktcontainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#nktproduct .nktcard {
+  
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #cce7d0;
+
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03);
+  margin: 15px 30px;
+
+  transition: 0.3s ease;
+
+  position: relative;
+}
+
+#nktproduct .nktcard:hover {
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+#nktproduct .nktcard img{
+  width: 100%;
+  border-radius: 20px;
+}
+
+#nktproduct .nktcard .nktcard-description {
+  text-align: start;
+  padding: 10px 0;
+}
+
+#nktproduct .nktcard .nktcard-description span {
+  color: #606063;
+  font-size: 12px;
+}
+
+#nktproduct .nktcard .nktcard-description h5 {
+  padding-top: 7px;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+#nktproduct .nktcard .nktcard-description h4 {
+  padding-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #088178;
+}
+
+#nktproduct .nktcard .nktcard-stock {
+    width: 70px;
+    height: 20px;
+    padding-top: 0%;
+    font-size: 12px;
+    line-height: 10px;
+    align-content: center;
+
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
 }
