@@ -26,6 +26,11 @@ import ProductsCarousel from '../components/ProductsCarousel'
 
 import ProductNKT from '../components/ProductNKT'
 
+import Banner from '../components/Banner'
+
+import DualGrid from '../components/DualGrid'
+import Newsletter from "../components/Newsletter";
+
 
 //Axios
 //import axios from 'axios' //not been used after the Redux application
@@ -58,7 +63,7 @@ function HomeScreen() {
   }, [dispatch, keyword]) //it is to create a loading/ error view
  
   return (
-    <div>
+    <div className="nktproduct">
 
       {(!keyword && !loading && Object.keys(productList.products).length === 0) ? <MessageTimer variant='info'>No Products</MessageTimer> : <ProductsCarousel/>}
       
@@ -79,8 +84,12 @@ function HomeScreen() {
                 <Paginate page={page} pages={pages} keyword={keyword} />
               </div>
       }  
+    <Banner/>
+    <DualGrid/>
 
+    <Newsletter />
     </div>
+    
   );
 }
 

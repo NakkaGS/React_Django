@@ -1,6 +1,8 @@
 # React_Django
 ECommerce in React+Redux+Django+Rest_framework_simplejwt
 
+![React+Django Project](https://i.ibb.co/hc5GpL6/2022-12-18-20-32-53-Pro-Shop-React-Django-App.png)
+
 ##### Project from Dennis Ivy - [Udemy Page](https://www.udemy.com/share/1043DY3@HuOSyjyc8t5xqKHk8rT3XofQkpo4O07LUh9oha4FwSuwlW7rwRoxT4P5FVHbocNf/)
 
 - Full featured shopping cart

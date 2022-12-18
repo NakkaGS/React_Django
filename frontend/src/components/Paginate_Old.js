@@ -2,10 +2,9 @@ import React from 'react'
 
 //Boostrap Components
 import { Pagination, Paginator } from 'react-bootstrap'
-//Router and Bootstrap
 
+//Router and Bootstrap
 import { Link } from 'react-router-dom'
-import { LinkContainer } from 'react-router-bootstrap'
 
 function Paginate({pages, page, keyword='', isAdmin=false}) {
 
