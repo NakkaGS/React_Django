@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders', #django cors headers
 
     'base.apps.BaseConfig',
+    'base'
 
 ]
 
