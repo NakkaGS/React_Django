@@ -24,6 +24,9 @@ from django.conf import settings #Imports the data from the Django settings.py
 from django.conf.urls.static import static #allows us to connect out urls
 from django.views.generic import TemplateView
 
+from datetime import datetime
+from django.http import HttpResponse
+
 urlpatterns = [
 
     path('admin/', admin.site.urls), #Open the admin website
@@ -34,6 +37,18 @@ urlpatterns = [
     
     #path('api/', include('base.urls')), #call the urls from the other app
 ]
+
+def index(request):
+    now = datetime.now()
+    html = f'''
+    <html>
+        <body>
+            <h1>Hello from Vercel!</h1>
+            <p>The current time is { now }.</p>
+        </body>
+    </html>
+    '''
+    return HttpResponse(html)
 
 #To show the images from the right folder in django admin
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
