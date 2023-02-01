@@ -30,7 +30,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
 
 
 # Application definition
@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'corsheaders', #django cors headers
 
     'base.apps.BaseConfig',
-    'base'
 
 ]
 
